@@ -9,7 +9,10 @@ namespace plugin5_demo.Commands
 {
 
     [Export(typeof(Command))]
-    [CommandItemMetadata(ViewType = ViewType.SalesDeliveryNote, CommandSize = CommandSize.Large, Text = PlugInTitle, Image = "document_email.png")]
+    [CommandItemMetadata(ViewType = ViewType.SalesDeliveryNote,
+                         CommandSize = CommandSize.Large,
+                         Text = PlugInTitle,
+                         Image = "document_email.png")]
     class CommandSendNoteByPDF : Command
     {
 
@@ -41,8 +44,8 @@ namespace plugin5_demo.Commands
                     // The assistant is configured
                     System.Text.StringBuilder settings = new System.Text.StringBuilder();
                     settings.AppendFormat("<? NAME='Email' TYPE='STRING' TEXT='E-mail' STYLE='EMAIL' REQUIRED=1>");
-                    settings.AppendFormat("<? NAME='Subject' TYPE='STRING' TEXT='Subject' DEFAULT='Delivery of delivery note material {0}'>", Aliquo.Core.Formats.SerialAndNumber(note.SerialCode, note.Number));
-                    settings.AppendFormat("<? NAME='Message' TYPE='STRING' TEXT='MensMessageaje' DEFAULT='Enclosed we send you information about the delivery of the delivery note {0}.' ROWS=9 LENGTH=2048>", Aliquo.Core.Formats.SerialAndNumber(note.SerialCode, note.Number));
+                    settings.AppendFormat("<? NAME='Subject' TYPE='STRING' TEXT='Subject' DEFAULT='Delivery note material {0}'>", Aliquo.Core.Formats.SerialAndNumber(note.SerialCode, note.Number));
+                    settings.AppendFormat("<? NAME='Message' TYPE='STRING' TEXT='Message' DEFAULT='Enclosed we send you information about the delivery of the {0}.' ROWS=9 LENGTH=2048>", Aliquo.Core.Formats.SerialAndNumber(note.SerialCode, note.Number));
 
                     ITask task = this.Host.Management.Views.WizardCustom(PlugInTitle, string.Empty, settings.ToString());
 

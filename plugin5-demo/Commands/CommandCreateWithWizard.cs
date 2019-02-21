@@ -1,4 +1,6 @@
-﻿using Aliquo.Core.Exceptions;
+﻿
+
+using Aliquo.Core.Exceptions;
 using Aliquo.Windows;
 using Aliquo.Windows.Extensibility;
 using System;
@@ -8,7 +10,8 @@ namespace plugin5_demo.Commands
 {
 
     [Export(typeof(Command))]
-    [CommandItemMetadata(ViewType = ViewType.SalesOrder, CommandSize = CommandSize.Middle, Text =PlugInTitle)]
+    [CommandItemMetadata(ViewType = ViewType.SalesOrder,
+                         CommandSize = CommandSize.Middle, Text = PlugInTitle)]
     class CommandCreateWithWizard : Command
     {
 

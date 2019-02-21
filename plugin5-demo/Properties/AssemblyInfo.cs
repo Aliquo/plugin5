@@ -6,11 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PlugIn Demo v5")]
-[assembly: AssemblyDescription("Aliquo Software")]
-[assembly: AssemblyConfiguration("Ábaco Ibérica de Software, S.L.")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyDescription("Support: soporte@aliquo.es")] 
+[assembly: AssemblyCompany("Ábaco Ibérica de Software, S.L.")]
 [assembly: AssemblyProduct("Aliquo Software")]
-[assembly: AssemblyCopyright("© 2018 Ábaco Ibérica de Software")]
+[assembly: AssemblyCopyright("© 2019 Ábaco Ibérica de Software")]
 [assembly: AssemblyTrademark("Aliquo")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +31,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("5.0.*")] 

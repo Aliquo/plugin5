@@ -8,7 +8,11 @@ namespace plugin5_demo.Commands
 {
 
     [Export(typeof(Command))]
-    [CommandItemMetadata(ViewType = ViewType.SalesOrder, CommandSize = CommandSize.Large, Text = "Create new document", CommandType = CommandType.QuickAction, ViewStyle = ViewStyle.List)]
+    [CommandItemMetadata(ViewType = ViewType.SalesOrder,
+                         CommandSize = CommandSize.Middle,
+                         Text = "Create new document",
+                         CommandType = CommandType.Action,
+                         ViewStyle = ViewStyle.List)]
     class CommandCreateNewNote : Command
     {
 
