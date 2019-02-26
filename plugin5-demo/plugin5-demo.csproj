@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Commands\CommandCreateWithWizard.cs" />
     <Compile Include="Commands\CommandCreateNewNote.cs" />
+    <Compile Include="Commands\CommandExampleWizard.cs" />
     <Compile Include="Commands\CommandMenuCompanyEnvironment.cs" />
     <Compile Include="Commands\CommandSendNoteByPDF.cs" />
     <Compile Include="Commands\CommandShowNewNote.cs" />
