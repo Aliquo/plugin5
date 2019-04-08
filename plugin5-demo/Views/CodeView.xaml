@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="plugin5_demo.Views.CodeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:plugin5_demo.Views"
+
+             xmlns:properties="clr-namespace:Aliquo.Windows.Properties;assembly=Aliquo.Windows"
+             xmlns:aliquo="clr-namespace:Aliquo.Windows;assembly=Aliquo.Windows"
+             xmlns:aliquoControls="clr-namespace:Aliquo.Windows.Controls;assembly=Aliquo.Windows" 
+             xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
+             mc:Ignorable="d" d:DesignWidth="929">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockNormal">
+                <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+            </Style>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Aliquo.Windows;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/Aliquo.Windows.Controls;Component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <fluent:Ribbon Grid.Row="0" Name="Ribbon">
+            <fluent:RibbonTabItem Header="{x:Static properties:Resources.General}" >
+
+                <fluent:RibbonGroupBox>
+                    <fluent:Button Header="Example of controls" LargeIcon="/Aliquo.Windows;component/Images/action_large.png" Size="Large" Click="Controls_Click" />
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox>
+                    <fluent:Button Header="Images available in resources" LargeIcon="/Aliquo.Windows;component/Images/image_large.png" Size="Large" Click="Images_Click"/>
+                </fluent:RibbonGroupBox>
+
+            </fluent:RibbonTabItem>
+        </fluent:Ribbon> 
+
+        <fluent:StatusBar Grid.Row="2" Name="StatusBar" />
+
+    </Grid>
+</UserControl>

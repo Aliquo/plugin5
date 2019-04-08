@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 
-namespace plugin5_demo.Commands
+namespace plugin5_demo.Process
 {
 
     [Export(typeof(Command))]
@@ -13,10 +13,10 @@ namespace plugin5_demo.Commands
                          Text = "Create new document",
                          CommandType = CommandType.Action,
                          ViewStyle = ViewStyle.List)]
-    class CommandCreateNewNote : Command
+    class ProcessEasyCreationNote : Command
     {
 
-        public CommandCreateNewNote()
+        public ProcessEasyCreationNote()
         {
             Execute += Command_Execute;
         }

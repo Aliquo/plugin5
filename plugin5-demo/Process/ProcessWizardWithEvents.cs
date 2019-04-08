@@ -1,32 +1,17 @@
 ﻿using Aliquo.Core.Exceptions;
 using Aliquo.Windows;
-using Aliquo.Windows.Extensibility;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 
-namespace plugin5_demo.Commands
+namespace plugin5_demo.Process
 {
-
-    [Export(typeof(Command))]
-    [CommandItemMetadata(ViewType = ViewType.Table,
-                         ViewKey = "Clientes",
-                         CommandSize = CommandSize.Middle,
-                         Text = PlugInTitle,
-                         CommandType = CommandType.Action,
-                         ViewStyle = ViewStyle.List)]
-    class CommandExampleWizard : Command
+    class WizardWithEvents
     {
 
         private const string PlugInTitle = "Wizard example";
 
-        public CommandExampleWizard()
-        {
-            Execute += Command_Execute;
-        }
-
-        private void Command_Execute(IHost sender, ExecuteEventArgs e)
+        public WizardWithEvents(IHost sender)
         {
 
             try

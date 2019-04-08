@@ -8,6 +8,7 @@ using System.ComponentModel.Composition;
 namespace plugin5_demo.Commands
 {
 
+    // This is a example to create a button in a subprocess call SalesDeliveryNote, the table Notas have subprocess for especific types.
     [Export(typeof(Command))]
     [CommandItemMetadata(ViewType = ViewType.SalesDeliveryNote,
                          CommandSize = CommandSize.Large,

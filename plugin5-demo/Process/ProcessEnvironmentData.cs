@@ -1,26 +1,11 @@
 ﻿using Aliquo.Windows;
-using Aliquo.Windows.Extensibility;
-using System.ComponentModel.Composition;
 
-namespace plugin5_demo.Commands
+namespace plugin5_demo.Process
 {
-    [Export(typeof(Command))]
-    [ProcessMetadata(CategoryProcess = ProcessCategory.Tools,
-                     CodeProcess = "_PLG_DEMOCOMPANYINFO",
-                     DescriptionProcess = "Shows information of the current session",
-                     NameProcess = "Company information")]
-    [CommandMenuMetadata(MenuText = "Company information",
-                         MainPageItemType = MainPageItemType.Menu,
-                         Process = "_PLG_DEMOCOMPANYINFO")]
-    class CommandMenuCompanyEnvironment : Command
+    class CommandMenuCompanyEnvironment
     {
 
-        public CommandMenuCompanyEnvironment()
-        {
-            Execute += Command_Execute;
-        }
-
-        private void Command_Execute(IHost sender, ExecuteEventArgs e)
+        public CommandMenuCompanyEnvironment(IHost sender)
         {
 
             // The environment information is collected

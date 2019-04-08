@@ -5,18 +5,16 @@ using System.Collections.Generic;
 
 namespace plugin5_demo.Process
 {
-    class ProcessCreateWithWizard
+    class ProcessCreateNoteWithWizard
     {
 
         private IHost Host;
-        private IView View;
 
-        public void ShowWizard(IHost host, IView view)
+        public void ShowWizard(IHost host)
         {
             try
             {
                 this.Host = host;
-                this.View = view;
 
                 // The assistant is configured
                 System.Text.StringBuilder settings = new System.Text.StringBuilder();
@@ -73,9 +71,6 @@ namespace plugin5_demo.Process
 
                 // Call the function to create the note
                 long id = await Host.Documents.SetNoteAsync(note);
-
-                // Update the list
-                this.View.Refresh();
 
             }
             catch (HandledException ex)

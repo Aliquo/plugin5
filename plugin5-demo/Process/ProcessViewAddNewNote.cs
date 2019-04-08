@@ -1,24 +1,13 @@
 ﻿using Aliquo.Windows;
-using Aliquo.Windows.Extensibility;
 using System;
-using System.ComponentModel.Composition;
 
-namespace plugin5_demo.Commands
+namespace plugin5_demo.Process
 {
 
-    [Export(typeof(Command))]
-    [CommandItemMetadata(ViewType = ViewType.SalesOrder,
-                         CommandSize = CommandSize.Large,
-                         Text = "Show new document")]
-    class CommandShowNewNote : Command
+    class ProcessViewAddNewNote
     {
 
-        public CommandShowNewNote()
-        {
-            Execute += Command_Execute;
-        }
-
-        private void Command_Execute(IHost sender, ExecuteEventArgs e)
+        public ProcessViewAddNewNote(IHost sender)
         {
 
             try
