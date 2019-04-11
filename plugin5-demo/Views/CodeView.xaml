@@ -42,6 +42,10 @@
                     <fluent:Button Header="Images available in resources" LargeIcon="/Aliquo.Windows;component/Images/image_large.png" Size="Large" Click="Images_Click"/>
                 </fluent:RibbonGroupBox>
 
+                <fluent:RibbonGroupBox>
+                    <fluent:Button Header="Grid example" LargeIcon="/Aliquo.Windows;component/Images/window_grid_large.png" Size="Large" Click="Grid_Click"/>
+                </fluent:RibbonGroupBox>
+
             </fluent:RibbonTabItem>
         </fluent:Ribbon> 
 

@@ -27,6 +27,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!--Ribbon construction example-->
         <fluent:Ribbon Grid.Row="0" Name="Ribbon">
             <fluent:RibbonTabItem Header="{x:Static properties:Resources.General}" >
                 <fluent:RibbonGroupBox>
@@ -65,6 +66,7 @@
             </fluent:RibbonTabItem>
         </fluent:Ribbon>
 
+        <!--Example of Aliquo.Windows.Controls controls-->
         <Grid Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -132,10 +134,11 @@
             </Grid>
 
             <TextBlock Grid.Column="0" Grid.Row="12" Text="Spellcheck text" />
-            <aliquoControls:TextBoxValidation Grid.Column="2" Grid.Row="12"  Grid.ColumnSpan="3" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" MinHeight="100" SpellCheck.IsEnabled="True"/>
+            <aliquoControls:TextBoxValidation Grid.Column="2" Grid.Row="12" Grid.ColumnSpan="3" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" MinHeight="100" SpellCheck.IsEnabled="True"/>
 
         </Grid>
 
+        <!--Example of icon to include in the status bar-->
         <fluent:StatusBar Grid.Row="2" Name="StatusBar" >
             <fluent:StatusBarItem>
                 <StackPanel Orientation="Horizontal">

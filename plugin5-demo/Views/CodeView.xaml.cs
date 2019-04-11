@@ -36,5 +36,10 @@ namespace plugin5_demo.Views
         {
             Views.ImagesView images = new Views.ImagesView(this.Host);
         }
+
+        private void Grid_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Views.GridView images = new Views.GridView(this.Host);
+        }
     }
 }

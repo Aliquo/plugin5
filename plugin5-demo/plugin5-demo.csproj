@@ -73,6 +73,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Aliquo Software 5\System.Windows.Interactivity.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -84,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CommandCreateNoteWithWizard.cs" />
+    <Compile Include="Process\ProcessCreateInvoiceFromNotes.cs" />
     <Compile Include="Process\ProcessEasyCreationNote.cs" />
     <Compile Include="Process\ProcessEnvironmentData.cs" />
     <Compile Include="Process\ProcessWizardWithEvents.cs" />
@@ -103,8 +108,14 @@
     <Compile Include="Views\ControlsView.xaml.cs">
       <DependentUpon>ControlsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GridView.xaml.cs">
+      <DependentUpon>GridView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ImagesView.xaml.cs">
       <DependentUpon>ImagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PathView.xaml.cs">
+      <DependentUpon>PathView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -122,9 +133,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ImagesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PathView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />
