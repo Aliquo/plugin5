@@ -48,7 +48,7 @@ namespace plugin5_demo.Process
                 note.Lines.Add(line);
 
                 // Call the function to create the note
-                Int64 id = await sender.Documents.SetNoteAsync(note);
+                long id = await sender.Documents.SetNoteAsync(note);
 
                 // Update the list
                 e.View.Refresh();

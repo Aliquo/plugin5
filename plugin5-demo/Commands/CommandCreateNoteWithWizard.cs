@@ -7,10 +7,9 @@ using System.ComponentModel.Composition;
 namespace plugin5_demo.Commands
 {
 
-    // This is a example to create a button in a table, in this case in Clientes table
+    // This is a example to create a button in the sales order list
     [Export(typeof(Command))]
-    [CommandItemMetadata(ViewType = ViewType.Table,
-                         ViewKey = "Clientes",
+    [CommandItemMetadata(ViewType = ViewType.SalesOrder,
                          CommandSize = CommandSize.Middle,
                          CommandType = CommandType.QuickAction,
                          Text = PlugInTitle,

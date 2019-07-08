@@ -9,7 +9,8 @@ namespace plugin5_demo.Commands
     [ProcessMetadata(CategoryProcess = ProcessCategory.Tools,
                      CodeProcess = "_PLG_DEMO",
                      DescriptionProcess = "Show PlugIn examples",
-                     NameProcess = "Show PlugIn examples")]
+                     NameProcess = "Show PlugIn examples",
+                     ModulesProcess = Aliquo.Core.LicencyModules.Basic)]
     [CommandMenuMetadata(MenuText = "Show PlugIn examples",
                          MenuImage = "action.png",
                          Process = "_PLG_DEMO")]

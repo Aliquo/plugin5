@@ -88,9 +88,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CommandCreateNoteWithWizard.cs" />
+    <Compile Include="Commands\CommandShowRiskCustomer.cs" />
     <Compile Include="Process\ProcessCreateInvoiceFromNotes.cs" />
     <Compile Include="Process\ProcessEasyCreationNote.cs" />
     <Compile Include="Process\ProcessEnvironmentData.cs" />
+    <Compile Include="Process\ProcessFirstAndLastCustomer.cs" />
     <Compile Include="Process\ProcessWizardWithEvents.cs" />
     <Compile Include="Commands\CommandMenuExamples.cs" />
     <Compile Include="Commands\CommandSendNoteByPDF.cs" />
