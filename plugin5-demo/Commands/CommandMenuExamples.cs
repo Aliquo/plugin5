@@ -26,7 +26,7 @@ namespace plugin5_demo.Commands
         {
 
             // Call the view of code examples
-            Views.CodeView examples = new Views.CodeView(sender);
+            new Views.CodeView(sender);
 
         }
     }

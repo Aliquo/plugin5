@@ -88,7 +88,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CommandCreateNoteWithWizard.cs" />
+    <Compile Include="Commands\CommandLockCustomer.cs" />
     <Compile Include="Commands\CommandShowRiskCustomer.cs" />
+    <Compile Include="Examples\Management\GetDataValueAsync.cs" />
+    <Compile Include="Examples\Management\UpdateDataAsync.cs" />
+    <Compile Include="Examples\Management\UpdateDataConditionedAsync.cs" />
     <Compile Include="Process\ProcessCreateInvoiceFromNotes.cs" />
     <Compile Include="Process\ProcessEasyCreationNote.cs" />
     <Compile Include="Process\ProcessEnvironmentData.cs" />

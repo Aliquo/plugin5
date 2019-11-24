@@ -44,6 +44,9 @@ namespace plugin5_demo.Views
             ListActions.Items.Add(new Action() { Code = "WizardWithEvents", Name = "Wizard with events", Description = "Example of how to perform events, between the controls themselves, of a custom assistant." });
 
             ListActions.Items.Add(new Action() { Code = "ProcessFirstAndLastCustomer", Name = "First and last customer", Description = "Search for the first and last client.\n\nUsing functions GetQueryTableAsync and GetDataValueAsync." });
+
+            ListActions.Items.Add(new Action() { Code = "ProcessCreateInvoiceFromNotes", Name = "First and last customer", Description = "Search for the first and last client.\n\nUsing functions GetQueryTableAsync and GetDataValueAsync." });
+
         }
 
         private void Controls_Click(object sender, System.Windows.RoutedEventArgs e)

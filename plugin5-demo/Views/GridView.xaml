@@ -14,8 +14,10 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Aliquo.Windows;Component/Themes/Generic.xaml" />
-                <ResourceDictionary Source="/Aliquo.Windows.Controls;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows;Component/Themes/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows.Controls;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows.Controls;Component/Themes/SfDataGridControlStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

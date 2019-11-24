@@ -63,13 +63,13 @@ namespace plugin5_demo.Process
                 {
                     Type = Aliquo.Core.LineType.Product,
                     Code = productCode,
-                    Quantity = 1
+                    Quantity = 4
                 };
 
                 // The line is assigned to the model list
                 note.Lines.Add(line);
 
-                // Call the function to create the note
+                // Call the function to create the note                
                 long id = await Host.Documents.SetNoteAsync(note);
 
             }

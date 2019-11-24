@@ -70,7 +70,7 @@
         <Grid Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>

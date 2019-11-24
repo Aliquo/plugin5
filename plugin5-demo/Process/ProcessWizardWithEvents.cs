@@ -36,7 +36,7 @@ namespace plugin5_demo.Process
 
         }
 
-        private Dictionary<string, System.Windows.Forms.Control> Controls = new Dictionary<string, System.Windows.Forms.Control>();
+        private Dictionary<string, System.Windows.Forms.Control> controls = new Dictionary<string, System.Windows.Forms.Control>();
 
         /// <summary>
         /// Collect the creation of each assistant control
@@ -48,18 +48,17 @@ namespace plugin5_demo.Process
 
             switch (e.Settings?["Name"].Value?.ToString().ToLower())
             {
-
                 case "sourcetext":
                     // The TextChanged event is assigned
                     (e.Control as System.Windows.Forms.Control).TextChanged += Step1_TextChanged;
 
                     // It is added to the collection of controls
-                    this.Controls.Add(e.Settings?["Name"].Value?.ToString(), (System.Windows.Forms.Control)e.Control);
+                    this.controls.Add(e.Settings?["Name"].Value?.ToString(), (System.Windows.Forms.Control)e.Control);
                     break;
 
                 case "targettext":
                     // It is added to the collection of controls
-                    this.Controls.Add(e.Settings?["Name"].Value?.ToString(), (System.Windows.Forms.Control)e.Control);
+                    this.controls.Add(e.Settings?["Name"].Value?.ToString(), (System.Windows.Forms.Control)e.Control);
                     break;
 
             }
@@ -74,8 +73,8 @@ namespace plugin5_demo.Process
             if (!String.IsNullOrWhiteSpace(control.Text))
             {
                 // The control is searched in the list
-                System.Windows.Forms.Control controlSourceText = Controls.FirstOrDefault(t => t.Key == "SourceText").Value;
-                System.Windows.Forms.Control controlTargetText = Controls.FirstOrDefault(t => t.Key == "TargetText").Value;
+                System.Windows.Forms.Control controlSourceText = controls.FirstOrDefault(t => t.Key == "SourceText").Value;
+                System.Windows.Forms.Control controlTargetText = controls.FirstOrDefault(t => t.Key == "TargetText").Value;
 
                 // The value of the property is assigned
                 controlTargetText.Text = controlSourceText.Text;

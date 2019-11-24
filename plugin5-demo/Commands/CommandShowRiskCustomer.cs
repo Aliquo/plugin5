@@ -10,11 +10,11 @@ namespace plugin5_demo.Commands
     // This is a example to create a button in a table, in this case in Clientes table
     [Export(typeof(Command))]
     [CommandItemMetadata(ViewType = ViewType.Table,
-                         ViewKey = "Clientes",
-                         CommandSize = CommandSize.Middle,
-                         CommandType = CommandType.QuickAction,
-                         Text = PlugInTitle,
-                         Image = "info.png")]
+                        ViewKey = "Clientes",
+                        CommandSize = CommandSize.Middle,
+                        CommandType = CommandType.QuickAction,
+                        Text = PlugInTitle,
+                        Image = "info.png")]
     class CommandShowRiskCustomer : Command
     {
 
