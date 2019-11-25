@@ -1,7 +1,6 @@
 ﻿using Aliquo.Windows;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Generic; 
 using System.Windows.Controls;
 
 namespace plugin5_demo.Views
