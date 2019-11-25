@@ -1,6 +1,7 @@
 ﻿using Aliquo.Windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace plugin5_demo.Views
@@ -20,6 +21,7 @@ namespace plugin5_demo.Views
             System.Windows.Media.Imaging.BitmapImage Image = SharedResources.GetBitmapImage("window_grid.png");
             IWindowView window = host.Management.Views.CreateWindowView(Title, Image);
 
+            window.Ribbon = this.Ribbon;
             window.Content = this;
             window.StatusBar = this.StatusBar;
 
@@ -39,6 +41,19 @@ namespace plugin5_demo.Views
             };
 
             GridSyncfusion.ItemsSource = listItemsGrid;
+        }
+
+        private void Info_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            int rowsSelected = 0;
+
+            foreach (GridItem row in (List<GridItem>)GridSyncfusion.ItemsSource)
+            {
+                if (row.Selected)
+                    ++rowsSelected;
+            }
+
+            Message.Show($"There are {rowsSelected} rows selected", "Save button", MessageImage.Information);
         }
     }
 

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
  
+             xmlns:properties="clr-namespace:Aliquo.Windows.Properties;assembly=Aliquo.Windows"
              xmlns:local="clr-namespace:plugin5_demo.Views" 
              xmlns:aliquoControls="clr-namespace:Aliquo.Windows.Controls;assembly=Aliquo.Windows.Controls" 
              xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
@@ -24,11 +25,22 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <syncf:SfDataGrid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" MinHeight="80" x:Name="GridSyncfusion"
+        <!--Ribbon construction example-->
+        <fluent:Ribbon Grid.Row="0" Name="Ribbon">
+            <fluent:RibbonTabItem Header="{x:Static properties:Resources.General}" >
+                <fluent:RibbonGroupBox>
+                    <fluent:Button Header="{x:Static properties:Resources.Information}" LargeIcon="/Aliquo.Windows;component/Images/info_large.png" Size="Large" Click="Info_Click" />
+                </fluent:RibbonGroupBox> 
+                
+            </fluent:RibbonTabItem>
+        </fluent:Ribbon>
+
+        <syncf:SfDataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" MinHeight="80" x:Name="GridSyncfusion"
                           ItemsSource="{Binding ListItemsGrid}" 
                           AutoGenerateColumns="False" 
                           AllowFiltering="True"
@@ -39,13 +51,13 @@
                           IsReadOnly="False"
                           AllowEditing="True"
                           EditorSelectionBehavior="SelectAll"
-                          ColumnSizer="SizeToHeader">
+                          ColumnSizer="SizeToHeader" >
             <syncf:SfDataGrid.Columns>
                 <syncf:GridCheckBoxColumn MappingName="Selected" HeaderText="Selected" TextAlignment="Center" />
-                <syncf:GridTextColumn MappingName="Name" HeaderText="Name" IsReadOnly="True" AllowEditing="False" />
-                <syncf:GridTextColumn MappingName="Quantity" HeaderText="Quantity" DisplayBinding="{Binding Quantity, StringFormat='{}{0:#,0}'}" TextAlignment="Right" IsReadOnly="True" AllowEditing="False"/>
-                <syncf:GridTextColumn MappingName="Amount" HeaderText="Amount" DisplayBinding="{Binding Amount, StringFormat='{}{0:#,0.00}'}" TextAlignment="Right" IsReadOnly="True" AllowEditing="False"/>
-                <syncf:GridDateTimeColumn MappingName="DateDelivery" HeaderText="Date delivery" TextAlignment="Right" IsReadOnly="True" AllowEditing="False"/>
+                <syncf:GridTextColumn MappingName="Name" HeaderText="Name" AllowEditing="False" />
+                <syncf:GridTextColumn MappingName="Quantity" HeaderText="Quantity" DisplayBinding="{Binding Quantity, StringFormat='{}{0:#,0}'}" TextAlignment="Right" AllowEditing="False"/>
+                <syncf:GridTextColumn MappingName="Amount" HeaderText="Amount" DisplayBinding="{Binding Amount, StringFormat='{}{0:#,0.00}'}" TextAlignment="Right" AllowEditing="False"/>
+                <syncf:GridDateTimeColumn MappingName="DateDelivery" HeaderText="Date delivery" TextAlignment="Right" AllowEditing="False"/>
             </syncf:SfDataGrid.Columns>
             <i:Interaction.Behaviors>
                 <aliquoControls:SfDataGridBehavior AddFillColumn="True"/>
