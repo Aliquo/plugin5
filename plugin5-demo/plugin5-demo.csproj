@@ -90,6 +90,8 @@
     <Compile Include="Commands\CommandCreateNoteWithWizard.cs" />
     <Compile Include="Commands\CommandLockCustomer.cs" />
     <Compile Include="Commands\CommandShowRiskCustomer.cs" />
+    <Compile Include="Events\EventsCustomer.cs" />
+    <Compile Include="Events\EventsSalesOrder.cs" />
     <Compile Include="Examples\Management\GetDataValueAsync.cs" />
     <Compile Include="Examples\Management\UpdateDataAsync.cs" />
     <Compile Include="Examples\Management\UpdateDataConditionedAsync.cs" />
@@ -108,11 +110,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\EventsConsoleViewModel.cs" />
     <Compile Include="Views\CodeView.xaml.cs">
       <DependentUpon>CodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ControlsView.xaml.cs">
       <DependentUpon>ControlsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EventsConsole.xaml.cs">
+      <DependentUpon>EventsConsole.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GridView.xaml.cs">
       <DependentUpon>GridView.xaml</DependentUpon>
@@ -136,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ControlsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EventsConsole.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
