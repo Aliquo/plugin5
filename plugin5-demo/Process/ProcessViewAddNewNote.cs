@@ -1,5 +1,5 @@
-﻿using Aliquo.Windows;
-using System;
+﻿using Aliquo.Core.Exceptions;
+using Aliquo.Windows;
 
 namespace plugin5_demo.Process
 {
@@ -27,7 +27,11 @@ namespace plugin5_demo.Process
                 sender.Documents.Views.AddNote(note);
 
             }
-            catch (Exception ex)
+            catch (HandledException ex)
+            {
+                Message.Show(ex.Message, "ProcessViewAddNewNote", MessageImage.Warning);
+            }
+            catch (System.Exception ex)
             {
                 sender.Management.Views.ShowException(ex);
             }

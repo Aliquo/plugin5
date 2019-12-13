@@ -7,7 +7,6 @@ namespace plugin5_demo.ViewModels
     {
 
         private string text;
-        private int position;
 
         private int indentLevel;
 

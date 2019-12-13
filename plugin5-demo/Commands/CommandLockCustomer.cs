@@ -51,9 +51,9 @@ namespace plugin5_demo.Commands
             }
             catch (HandledException ex)
             {
-                Message.Show(ex.Message, PlugInTitle, MessageImage.Warning);
+                Message.Show(ex.Message, "CommandLockCustomer", MessageImage.Warning);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 sender.Management.Views.ShowException(ex);
             }

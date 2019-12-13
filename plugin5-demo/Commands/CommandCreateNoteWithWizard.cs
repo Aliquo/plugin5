@@ -36,7 +36,7 @@ namespace plugin5_demo.Commands
             }
             catch (HandledException ex)
             {
-                Message.Show(ex.Message, PlugInTitle, MessageImage.Warning);
+                Message.Show(ex.Message, "CommandCreateNoteWithWizard", MessageImage.Warning);
             }
             catch (Exception ex)
             {

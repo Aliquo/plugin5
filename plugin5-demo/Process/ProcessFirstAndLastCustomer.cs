@@ -1,6 +1,5 @@
 ﻿using Aliquo.Core.Exceptions;
 using Aliquo.Windows;
-using System;
 using System.Collections.Generic;
 
 namespace plugin5_demo.Process
@@ -27,11 +26,11 @@ namespace plugin5_demo.Process
             }
             catch (HandledException ex)
             {
-                throw new HandledException(ex.Message, ex);
+                Message.Show(ex.Message, "ProcessFirstAndLastCustomer", MessageImage.Warning);
             }
             catch (System.Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                host.Management.Views.ShowException(ex);
             }
         }
 

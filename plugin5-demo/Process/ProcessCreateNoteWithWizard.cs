@@ -29,11 +29,11 @@ namespace plugin5_demo.Process
             }
             catch (HandledException ex)
             {
-                throw new HandledException(ex.Message, ex);
+                Message.Show(ex.Message, "ProcessCreateNoteWithWizard", MessageImage.Warning);
             }
             catch (System.Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                host.Management.Views.ShowException(ex);
             }
         }
 

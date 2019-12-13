@@ -64,7 +64,11 @@ namespace plugin5_demo.Commands
                 }
 
             }
-            catch (Exception ex)
+            catch (HandledException ex)
+            {
+                Message.Show(ex.Message, "CommandSendNoteByPDF", MessageImage.Warning);
+            }
+            catch (System.Exception ex)
             {
                 sender.Management.Views.ShowException(ex);
             }

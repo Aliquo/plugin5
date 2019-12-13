@@ -1,6 +1,6 @@
-﻿using Aliquo.Windows;
+﻿using Aliquo.Core.Exceptions;
+using Aliquo.Windows;
 using Aliquo.Windows.Extensibility;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 
@@ -57,7 +57,11 @@ namespace plugin5_demo.Process
                 sender.Documents.Views.ShowNote(id, isActive: true);
 
             }
-            catch (Exception ex)
+            catch (HandledException ex)
+            {
+                Message.Show(ex.Message, "ProcessEasyCreationNote", MessageImage.Warning);
+            }
+            catch (System.Exception ex)
             {
                 sender.Management.Views.ShowException(ex);
             }

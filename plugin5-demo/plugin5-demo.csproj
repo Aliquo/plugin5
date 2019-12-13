@@ -95,10 +95,11 @@
     <Compile Include="Examples\Management\GetDataValueAsync.cs" />
     <Compile Include="Examples\Management\UpdateDataAsync.cs" />
     <Compile Include="Examples\Management\UpdateDataConditionedAsync.cs" />
-    <Compile Include="Process\ProcessCreateInvoiceFromNotes.cs" />
+    <Compile Include="Process\ProcessCreateServiceInvoice.cs" />
     <Compile Include="Process\ProcessEasyCreationNote.cs" />
     <Compile Include="Process\ProcessEnvironmentData.cs" />
     <Compile Include="Process\ProcessFirstAndLastCustomer.cs" />
+    <Compile Include="Process\ProcessWizardExample.cs" />
     <Compile Include="Process\ProcessWizardWithEvents.cs" />
     <Compile Include="Commands\CommandMenuExamples.cs" />
     <Compile Include="Commands\CommandSendNoteByPDF.cs" />
@@ -125,9 +126,6 @@
     </Compile>
     <Compile Include="Views\ImagesView.xaml.cs">
       <DependentUpon>ImagesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PathView.xaml.cs">
-      <DependentUpon>PathView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -156,10 +154,6 @@
     <Page Include="Views\ImagesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PathView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />
