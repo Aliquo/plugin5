@@ -21,7 +21,7 @@ namespace plugin5_demo.Process
                 object lastCustomer = await host.Management.GetDataValueAsync("Clientes", "Codigo", "FechaAlta IS NOT NULL", order: "FechaAlta DESC");
 
                 // The search result is displayed
-                Message.Show($"The first client in the database, sorted by date, is the code [{firstCustomer["Codigo"].Value}] and the last one is the code [{lastCustomer.ToString()}]", "First and last customer code by date");
+                Message.Show($"The first client in the database, sorted by discharge date, is the code [{firstCustomer["Codigo"].Value}] and the last one is the code [{lastCustomer.ToString()}]", "First and last customer code by date");
 
             }
             catch (HandledException ex)

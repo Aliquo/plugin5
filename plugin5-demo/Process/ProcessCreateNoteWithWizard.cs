@@ -19,7 +19,7 @@ namespace plugin5_demo.Process
                 // The assistant is configured
                 System.Text.StringBuilder settings = new System.Text.StringBuilder();
                 settings.AppendFormat("<? NAME='CustomerCode' TYPE='STRING' TEXT='Customer' WIDTH=100 TABLE='Clientes' FIELD='Codigo' FIELDTEXT='Nombre' REQUIRED=1>");
-                settings.AppendFormat("<? NAME='DateNote' TYPE='DATE' TEXT='Date' WIDTH=100 REQUIRED=1 DEFAULT='{0}'>", DateTime.Now);
+                settings.AppendFormat("<? NAME='DateNote' TYPE='DATE' TEXT='Date' WIDTH=100 REQUIRED=1 DEFAULT='{0}'>", this.Host.Environment.WorkDate);
                 settings.AppendFormat("<? NAME='ProductCode' TYPE='STRING' TEXT='Product' WIDTH=100 TABLE='Articulos' FIELD='Codigo' FIELDTEXT='Nombre' REQUIRED=1>");
 
                 ITask task = host.Management.Views.WizardCustom("Create new document with wizard", string.Empty, settings.ToString());
@@ -75,12 +75,13 @@ namespace plugin5_demo.Process
             }
             catch (HandledException ex)
             {
-                throw new HandledException(ex.Message, ex);
+                Message.Show(ex.Message, "ProcessCreateNoteWithWizard_ExecuteWizardFinishingAsync", MessageImage.Warning);
             }
             catch (System.Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                Host.Management.Views.ShowException(ex);
             }
+
         }
 
     }

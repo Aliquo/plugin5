@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Support: soporte@aliquo.es")] 
 [assembly: AssemblyCompany("Ábaco Ibérica de Software, S.L.")]
 [assembly: AssemblyProduct("Aliquo Software")]
-[assembly: AssemblyCopyright("© 2019 Ábaco Ibérica de Software")]
+[assembly: AssemblyCopyright("© 2020 Ábaco Ibérica de Software")]
 [assembly: AssemblyTrademark("Aliquo")]
 [assembly: AssemblyCulture("")]
 
@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.0.1911.*")] 
+[assembly: AssemblyVersion("5.0.2003.*")] 

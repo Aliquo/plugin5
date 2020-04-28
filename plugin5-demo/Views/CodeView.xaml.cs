@@ -45,23 +45,30 @@ namespace plugin5_demo.Views
 
             ListActions.Items.Add(new Action() { Code = "ProcessFirstAndLastCustomer", Name = "First and last customer", Description = "Search for the first and last client.\n\nUsing functions GetQueryTableAsync and GetDataValueAsync" });
 
-            ListActions.Items.Add(new Action() { Code = "ProcessCreateServiceInvoice", Name = "Create service invoice", Description = "Create a service invoice" }); 
+            ListActions.Items.Add(new Action() { Code = "ProcessCreateServiceInvoice", Name = "Create service invoice", Description = "Create a service invoice" });
+
+            ListActions.Items.Add(new Action() { Code = "ProcessDeliverOrder", Name = "Create delivery from order (sales)", Description = "Create a delivery note from order (sales)" });
 
         }
 
         private void Controls_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Views.ControlsView examples = new Views.ControlsView(this.Host);
+            new Views.ControlsView(this.Host);
         }
 
         private void Images_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Views.ImagesView images = new Views.ImagesView(this.Host);
+            new Views.ImagesView(this.Host);
         }
 
         private void Grid_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            Views.GridView images = new Views.GridView(this.Host);
+            new Views.GridView(this.Host);
+        }
+
+        private void List_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            new Views.ListQuery(this.Host);
         }
 
         private void Wizard_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -101,7 +108,12 @@ namespace plugin5_demo.Views
                     Process.ProcessCreateServiceInvoice processCreateServiceInvoice = new Process.ProcessCreateServiceInvoice();
                     processCreateServiceInvoice.StartProcess(this.Host);
                     break;
-             
+
+                case "ProcessDeliverOrder":
+                    Process.ProcessDeliverOrder processDeliverOrder = new Process.ProcessDeliverOrder();
+                    processDeliverOrder.StartProcess(this.Host);
+                    break;
+
             }
 
         }

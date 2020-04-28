@@ -9,7 +9,7 @@
              xmlns:aliquo="clr-namespace:Aliquo.Windows;assembly=Aliquo.Windows"
              xmlns:aliquoControls="clr-namespace:Aliquo.Windows.Controls;assembly=Aliquo.Windows" 
              xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
-             mc:Ignorable="d" d:DesignWidth="929">
+             mc:Ignorable="d" d:DesignWidth="929" d:DesignHeight="300">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -44,6 +44,7 @@
 
                 <fluent:RibbonGroupBox>
                     <fluent:Button Header="Grid example" LargeIcon="/Aliquo.Windows;component/Images/window_grid_large.png" Size="Large" Click="Grid_Click"/>
+                    <fluent:Button Header="List table example" LargeIcon="/Aliquo.Windows;component/Images/window_grid_large.png" Size="Large" Click="List_Click"/>
                 </fluent:RibbonGroupBox>
 
                 <fluent:RibbonGroupBox>
@@ -53,7 +54,7 @@
             </fluent:RibbonTabItem>
         </fluent:Ribbon>
 
-        <ListBox Name="ListActions" HorizontalContentAlignment="Stretch" >
+        <ListBox Name="ListActions" HorizontalContentAlignment="Stretch" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Button Click="ButtonAction_Click" HorizontalContentAlignment="Stretch" >

@@ -96,6 +96,7 @@
     <Compile Include="Examples\Management\UpdateDataAsync.cs" />
     <Compile Include="Examples\Management\UpdateDataConditionedAsync.cs" />
     <Compile Include="Process\ProcessCreateServiceInvoice.cs" />
+    <Compile Include="Process\ProcessDeliverOrder.cs" />
     <Compile Include="Process\ProcessEasyCreationNote.cs" />
     <Compile Include="Process\ProcessEnvironmentData.cs" />
     <Compile Include="Process\ProcessFirstAndLastCustomer.cs" />
@@ -127,6 +128,9 @@
     <Compile Include="Views\ImagesView.xaml.cs">
       <DependentUpon>ImagesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ListQuery.xaml.cs">
+      <DependentUpon>ListQuery.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -152,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ImagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListQuery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
