@@ -38,11 +38,6 @@
         <!--Example of displaying data from query-->
         <aliquocontrols:DataGrid x:Name="datagrid"
                          Grid.Row="1"
-                         Host="{Binding Host}"
-                         Tables="{Binding Tables, Mode=OneWay}"
-                         Fields="{Binding Fields, Mode=OneWay}"
-                         SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         VisibleFilterRow="{Binding AutoFilter, UpdateSourceTrigger=PropertyChanged}"
                          VisibleSummaryRow="True"
                          AllowResizingColumns="True"
                          AllowMultiSelect="True"

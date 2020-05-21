@@ -44,7 +44,7 @@ namespace plugin5_demo.Views
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.ImporteDtoPPago", Alias = "Facturas:DtoPPago", Text = "Discount soon pay", Caption = "Discounts" },
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.ImporteDtoEspecial", Alias = "Facturas:DtoEspecial", Text = "Special discount", Caption = "Discounts" },
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "(Facturas.ImporteDtoHabitual + Facturas.ImporteDtoPPago + Facturas.ImporteDtoEspecial)", Alias = "Facturas:Dtos", Text = "Amount discounts", Caption = "Discounts" }
-            };    
+            };
 
             window.Ribbon = this.Ribbon;
             window.Content = this;
