@@ -30,7 +30,10 @@
         <fluent:Ribbon Grid.Row="0" Name="Ribbon">
             <fluent:RibbonTabItem Header="{x:Static properties:Resources.General}" >
                 <fluent:RibbonGroupBox>
-                    <fluent:Button Header="Example button" LargeIcon="/Aliquo.Windows;component/Images/info_large.png" Size="Large" />
+                    <fluent:Button Header="{x:Static properties:Resources.Refresh}" LargeIcon="/Aliquo.Windows;component/Images/refresh_large.png" Size="Large" Click="Refresh_Click"  />
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox>
+                    <fluent:Button Header="Refresh Async" LargeIcon="/Aliquo.Windows;component/Images/refresh_large.png" Size="Large" Click="RefreshAsync_Click"  />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
         </fluent:Ribbon>

@@ -1,6 +1,5 @@
 ﻿using Aliquo.Windows;
 using Aliquo.Windows.Controls;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
@@ -30,9 +29,12 @@ namespace plugin5_demo.Views
             {
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Id", IsHidden = true, IsKey = true, NotSettable = true },
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Abono", Text = "Return" },
-                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Numero", Text = "Number", Format = Aliquo.Core.Formats.NumberPattern(0, false) },
-                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.CodSerie", Text = "Serial code" },
-                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Fecha", Text = "Date", Format = Aliquo.Core.Formats.DatePattern(), SortDirection = FieldSortDirection.Descending },
+
+                // Also you can use the Aliquo Resources, for example, these
+                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.CodSerie", Text = Aliquo.Windows.Properties.Resources.InvoiceSerial },
+                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Numero", Text = Aliquo.Windows.Properties.Resources.InvoiceNumber, Format = Aliquo.Core.Formats.NumberPattern(0, false) },
+                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Fecha", Text = Aliquo.Windows.Properties.Resources.InvoiceDate, Format = Aliquo.Core.Formats.DatePattern(), SortDirection = FieldSortDirection.Descending },
+
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.ImporteNETO", Text = "Amount", Format = Aliquo.Core.Formats.NumberPattern(), Summary = FieldSummaryType.Sum },
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.CodCliente", Text = "Customer code" },
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.Nombre", Text = "Customer name" },
@@ -49,6 +51,16 @@ namespace plugin5_demo.Views
             window.Ribbon = this.Ribbon;
             window.Content = this;
             window.StatusBar = this.StatusBar;
+        }
+
+        private void Refresh_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            datagrid.Load();
+        }
+
+        private async void RefreshAsync_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            await datagrid.LoadAsync();
         }
     }
 }

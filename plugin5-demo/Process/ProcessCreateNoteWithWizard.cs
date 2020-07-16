@@ -72,6 +72,9 @@ namespace plugin5_demo.Process
                 // Call the function to create the note                
                 long id = await Host.Documents.SetNoteAsync(note);
 
+                // The created note is displayed
+                Host.Documents.Views.ShowNote(id);
+
             }
             catch (HandledException ex)
             {
