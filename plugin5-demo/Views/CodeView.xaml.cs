@@ -49,6 +49,8 @@ namespace plugin5_demo.Views
 
             ListActions.Items.Add(new Action() { Code = "ProcessDeliverOrder", Name = "Create delivery from order (sales)", Description = "Create a delivery note from order (sales)" });
 
+            ListActions.Items.Add(new Action() { Code = "ProcessUpdateInvoicePayments", Name = "Change the payment date of an invoice (purchases)", Description = "Get the last payment and change the date (purchases)" });
+            
         }
 
         private void Controls_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -112,6 +114,11 @@ namespace plugin5_demo.Views
                 case "ProcessDeliverOrder":
                     Process.ProcessDeliverOrder processDeliverOrder = new Process.ProcessDeliverOrder();
                     processDeliverOrder.StartProcess(this.Host);
+                    break;
+
+                case "ProcessUpdateInvoicePayments":
+                    Process.ProcessUpdateInvoicePayments processUpdateInvoicePayments = new Process.ProcessUpdateInvoicePayments();
+                    processUpdateInvoicePayments.StartProcess(this.Host);
                     break;
 
             }
