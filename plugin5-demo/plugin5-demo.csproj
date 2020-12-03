@@ -95,6 +95,7 @@
     <Compile Include="Examples\Management\GetDataValueAsync.cs" />
     <Compile Include="Examples\Management\UpdateDataAsync.cs" />
     <Compile Include="Examples\Management\UpdateDataConditionedAsync.cs" />
+    <Compile Include="Process\ProcessUpdateInvoicePayments.cs" />
     <Compile Include="Process\ProcessCreateServiceInvoice.cs" />
     <Compile Include="Process\ProcessDeliverOrder.cs" />
     <Compile Include="Process\ProcessEasyCreationNote.cs" />
@@ -164,6 +165,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Examples\Documents\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

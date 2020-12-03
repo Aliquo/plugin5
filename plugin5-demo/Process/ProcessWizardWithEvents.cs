@@ -17,12 +17,26 @@ namespace plugin5_demo.Process
             try
             {
                 // The assistant is configured
-                System.Text.StringBuilder settings = new System.Text.StringBuilder();
-                settings.AppendFormat("<? NAME='SourceText' TYPE='STRING' TEXT='Source text' STEPCAPTION='Uses the TextChanged event to copy the text to another control' >");
-                settings.AppendFormat("<? NAME='TargetText' TYPE='STRING' TEXT='Target text' READONLY=1>");
+                var wizard = new Aliquo.Windows.Wizard.WizardView();
+                var wizardStep = new Aliquo.Windows.Wizard.WizardStep { StepText = "Uses the TextChanged event to copy the text to another control" };
 
-                // The reference to the ControlAddedEvent event is added
-                ITask task = sender.Management.Views.WizardCustom(PlugInTitle, string.Empty, settings.ToString(), controlAdded: ControlAddedEvent);
+                wizardStep.AddControl(new Aliquo.Windows.Wizard.Controls.WizardText()
+                {
+                    Name = "SourceText",
+                    Text = "Source text"
+                });
+
+                wizardStep.AddControl(new Aliquo.Windows.Wizard.Controls.WizardText()
+                {
+                    Name = "TargetText",
+                    Text = "Target text",
+                    ReadOnly = true
+                });
+
+                wizard.AddStep(wizardStep);
+
+                // The reference to the ControlAddedEvent event is added                
+                ITask task = sender.Management.Views.WizardCustom(PlugInTitle, string.Empty, wizard, controlAdded: ControlAddedEvent);
 
             }
             catch (HandledException ex)

@@ -1,75 +1,227 @@
 ﻿using Aliquo.Core.Exceptions;
 using Aliquo.Windows;
+using Aliquo.Windows.Wizard;
+using Aliquo.Windows.Wizard.Controls;
+using Aliquo.Windows.Wizard.Link;
+using Aliquo.Windows.Wizard.List;
+using Aliquo.Windows.Wizard.Styles;
 using System;
 
 namespace plugin5_demo.Process
 {
     class ProcessWizardExample
     {
-        private IHost Host;
-
         public ProcessWizardExample(IHost host)
         {
             try
             {
-                this.Host = host;
-
                 // The assistant is configured
-                System.Text.StringBuilder settings = new System.Text.StringBuilder();
+                WizardView wizardView = new WizardView();
 
                 // Different available types 
+                WizardStep wizardStep1 = new WizardStep();
+
+                // Different available types 
+                // Label
+                wizardStep1.AddControl(new WizardLabel()
+                {
+                    Rows = 4,
+                    Text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                });
+
                 // Date
-                settings.AppendFormat("<? NAME='Date' TEXT='Date' TYPE='DATETIME' STYLE='DATE' DEFAULT='{0}'>", DateTime.Now);
+                wizardStep1.AddControl(new WizardDateTime()
+                {
+                    Name = "Date",
+                    Text = "Date",
+                    Default = DateTime.Now.ToString(),
+                    Style = WizardDateTimeStyle.Date
+                });
+
                 // Date and time
-                settings.AppendFormat("<? NAME='DateTime' TEXT='Date and time' TYPE='DATETIME' STYLE='DATETIME' DEFAULT='{0}'>", DateTime.Now);
+                wizardStep1.AddControl(new WizardDateTime()
+                {
+                    Name = "DateTime",
+                    Text = "Date and time",
+                    Default = DateTime.Now.ToString(),
+                    Style = WizardDateTimeStyle.DateTime
+                });
+
                 // Time
-                settings.AppendFormat("<? NAME='Time' TEXT='Time' TYPE='DATETIME' STYLE='TIME' DEFAULT='{0}'>", DateTime.Now);
+                wizardStep1.AddControl(new WizardDateTime()
+                {
+                    Name = "Time",
+                    Text = "Time",
+                    Default = DateTime.Now.ToString(),
+                    Style = WizardDateTimeStyle.Time
+                });
+
                 // Time
-                settings.AppendFormat("<? NAME='TimeShort' TEXT='Time short' TYPE='DATETIME' STYLE='TIMESHORT' DEFAULT='{0}'>", DateTime.Now);
+                wizardStep1.AddControl(new WizardDateTime()
+                {
+                    Name = "TimeShort",
+                    Text = "Time short",
+                    Default = DateTime.Now.ToString(),
+                    Style = WizardDateTimeStyle.Timeshort
+                });
 
                 // With STEP we mark on which screen we want to show the control
-                // STEPTEXT is the title of the window
+                // StepText is the title of the window
+                WizardStep wizardStep2 = new WizardStep { StepText = "Different styles of type string" };
 
                 // String
-                settings.Append ("<? NAME='Text' TEXT='Text' TYPE='STRING' STEP=2 STEPTEXT='Different styles of type string'>");
-                // String (only letters)
-                settings.Append("<? NAME='Letters1' TEXT='Letters' TYPE='STRING' STYLE='LETTERS' STEP=2>");
-                // String (all except numbers)
-                settings.Append("<? NAME='Letters2' TEXT='Letters (with Invalid)' TYPE='STRING' STYLE='INVALIDCHARACTERS;0123456789' STEP=2>");
-                // String (only numbers)
-                settings.Append("<? NAME='Numbers' TEXT='Numbers' TYPE='STRING' STYLE='VALIDCHARACTERS;0123456789' STEP=2>");
-                // String (email)
-                settings.Append("<? NAME='Email' TEXT='Email' TYPE='STRING' STYLE='EMAIL' STEP=2>");
-                // String (list)
-                settings.Append("<? NAME='List' TEXT='List' TYPE='STRING' LIST='Value 1;1|Value 2;2|Value 3;3|Value 4;4|Value 5;5|Value 6;6' DEFAULT='3' STEP=2>");
+                wizardStep2.AddControl(new WizardText()
+                {
+                    Name = "Text",
+                    Text = "Text"
+                });
 
+                // String (only letters)
+                wizardStep2.AddControl(new WizardText()
+                {
+                    Name = "Letters1",
+                    Text = "Letters",
+                    Style = WizardTextStyle.Letters
+                });
+
+                // String (all except numbers)
+                wizardStep2.AddControl(new WizardText()
+                {
+                    Name = "Letters2",
+                    Text = "Letters (with Invalid)",
+                    Style = WizardTextStyle.InvalidCharacters("0123456789")
+                });
+
+                // String (only numbers)
+                wizardStep2.AddControl(new WizardText()
+                {
+                    Name = "Numbers",
+                    Text = "Numbers",
+                    Style = WizardTextStyle.ValidCharacters("0123456789")
+                });
+
+                // String (email)
+                wizardStep2.AddControl(new WizardText()
+                {
+                    Name = "Email",
+                    Text = "Email",
+                    Style = WizardTextStyle.Email
+                });
+
+                // String (list)
+                WizardList wizardTextList = new WizardList()
+                {
+                    Name = "List",
+                    Text = "List",
+                    Default = "3"
+                };
+                wizardTextList.SetList(new WizardValuesList()
+                {
+                    Items =
+                    {
+                        new  WizardListItem { Key = '1', Text = "Value 1" },
+                        new  WizardListItem { Key = '2', Text = "Value 2" },
+                        new  WizardListItem { Key = '3', Text = "Value 3" },
+                        new  WizardListItem { Key = '4', Text = "Value 4" },
+                        new  WizardListItem { Key = '5', Text = "Value 5" },
+                        new  WizardListItem { Key = '6', Text = "Value 6" }
+                    }
+                });
+                wizardStep2.AddControl(wizardTextList);
 
                 // Others uses
+                WizardStep wizardStep3 = new WizardStep { StepText = "Others uses of wizard" };
                 // DEFAULT
-                settings.AppendFormat("<? NAME='TextDefault' TEXT='Text (with value)' TYPE='STRING' DEFAULT='{0}' STEP=3 STEPTEXT='Others uses of wizard'>", "Text by default");
+                wizardStep3.AddControl(new WizardText()
+                {
+                    Name = "TextDefault",
+                    Text = "Text (with value)",
+                    Default = "Text by default"
+                });
+
                 // REQUIRED
-                settings.Append("<? NAME='TextRequired' TEXT='Text required' TYPE='STRING' REQUIRED=1 STEP=3>"); 
+                wizardStep3.AddControl(new WizardText()
+                {
+                    Name = "TextRequired",
+                    Text = "Text required",
+                    Required = true
+                });
+
                 // WIDTH
-                settings.Append("<? NAME='TextWidth' TEXT='Text (width)' TYPE='STRING' WIDTH=100 STEP=3>");
+                wizardStep3.AddControl(new WizardText()
+                {
+                    Name = "TextWidth",
+                    Text = "Text (width)",
+                    Width = 100
+                });
+
                 // LENGTH
-                settings.Append("<? NAME='TextMaxLength' TEXT='Text (maxlength 5)' TYPE='STRING' LENGTH=5 STEP=3>");
+                wizardStep3.AddControl(new WizardText()
+                {
+                    Name = "TextMaxLength",
+                    Text = "Text (maxlength 5)",
+                    Length = 5
+                });
 
-                // Connect with tables           
-                settings.Append("<? NAME='CustomerCode' TEXT='Customer' TYPE='STRING' TABLE='Clientes' FIELD='Codigo' FIELDTEXT='Nombre' STEP=4>");
-                // Connect with filter           
-                settings.Append("<? NAME='CustomerCode' TEXT='Customer (only of Madrid)' TYPE='STRING' TABLE='Clientes' FIELD='Codigo' FIELDTEXT='Nombre' FILTER=\"Clientes.CodigoPostal LIKE '28%'\" STEP=4>");
+
+                WizardStep wizardStep4 = new WizardStep { StepText = "Others uses of wizard" };
+
+                // Connect with tables
+                WizardText wizardTableLink = new WizardText() { Name = "CustomerCode", Text = "Customer" };
+                wizardTableLink.SetLink(new WizardTableLink()
+                {
+                    Table = "Clientes",
+                    FieldKey = "Codigo",
+                    FieldText = "Nombre",
+                    Fields = { "Codigo", "Nombre", "CIF" },
+                    Filter = "Clientes.Provincia='Madrid'",
+                    Order = "Clientes.Nombre"
+                });
+                wizardStep4.AddControl(wizardTableLink);
                 // List of periodicity rows
-                settings.Append("<? NAME='ListTable' TEXT='Periodicity' TYPE='STRING' TABLE='Tipos_Periodicidad' LIST='Nombre;Id' ROWS=5 LISTMULTISELECT=1 STEP=4>");
+                WizardList wizardTableLinkMultiSelect = new WizardList() { Name = "ListTable", Text = "Periodicity", Rows = 5, Multiselect = true };
+                var list = new WizardTableList()
+                {
+                    Table = "Tipos_Periodicidad",
+                    FieldKey = "Id",
+                    FieldText = "Nombre"
+                };
+                wizardTableLinkMultiSelect.SetList(list);
+                wizardStep4.AddControl(wizardTableLinkMultiSelect);
 
+                WizardStep wizardStep5 = new WizardStep { StepText = "These options show the system dialog boxes" };
 
                 // System dialog boxes
-                settings.Append("<? NAME='OpenFile' TEXT='Open file' TYPE='STRING' STYLE='OPENFILE;Test documents (*.txt)|*.txt|All files (*.*)|*.*' STEP=5 STEPTEXT='These options show the system dialog boxes'>");
-                settings.Append("<? NAME='SaveFile' TEXT='Save file' TYPE='STRING' STYLE='SAVEFILE;Test documents (*.txt)|*.txt|All files (*.*)|*.*' STEP=5>");
-                settings.Append("<? NAME='Directory' TEXT='Folder browser' TYPE='STRING' STYLE='FOLDERBROWSER' STEP=5>");
+                wizardStep5.AddControl(new WizardOpenFile()
+                {
+                    Name = "OpenFile",
+                    Text = "Open file",
+                    DefaultExtension = ".txt",
+                    FilterFiles = "Test documents (*.txt)|*.txt|All files (*.*)|*.*"
+                });
 
-                ITask task = host.Management.Views.WizardCustom("Examples", "Long description on the initial screen of the wizard.\r\n\r\nNormally, the operation or warnings are explained to the user.\r\n\r\nYou can find more information about wizards at https://www.aliquo.software/config-parametros-asistente/", settings.ToString());
+                wizardStep5.AddControl(new WizardSaveFile()
+                {
+                    Name = "SaveFile",
+                    Text = "Save file",
+                    DefaultExtension = ".txt",
+                    FilterFiles = "Test documents (*.txt)|*.txt|All files (*.*)|*.*"
+                });
 
-                // You can find more information about wizards at https://www.aliquo.software/config-parametros-asistente/
+                wizardStep5.AddControl(new WizardFolderBrowser()
+                {
+                    Name = "Directory",
+                    Text = "Folder browser",
+                    Default = @"C:\"
+                });
+
+                wizardView.AddStep(wizardStep1);
+                wizardView.AddStep(wizardStep2);
+                wizardView.AddStep(wizardStep3);
+                wizardView.AddStep(wizardStep4);
+                wizardView.AddStep(wizardStep5);
+
+                ITask taskFromWizardView = host.Management.Views.WizardCustom("Examples", "Long description on the initial screen of the wizard.\r\n\r\nNormally, the operation or warnings are explained to the user.\r\n\r\nYou can find more information about wizards at https://www.aliquo.software/config-parametros-asistente/", wizardView);
 
             }
             catch (HandledException ex)

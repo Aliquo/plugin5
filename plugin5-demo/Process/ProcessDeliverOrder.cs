@@ -13,7 +13,7 @@ namespace plugin5_demo.Process
             {
 
                 // Get an order pending delivery
-                long idOrder = 436781; // Convert.ToInt64(await host.Management.GetDataValueAsync("Notas", "Id", "CodTipoNota='X' AND Estado='A' AND PedidoConEntregas=0", "NEWID()"));
+                long idOrder = Convert.ToInt64(await host.Management.GetDataValueAsync("Notas", "Id", "CodTipoNota='X' AND Estado='A' AND PedidoConEntregas=0", "NEWID()"));
 
                 // Show current order status
                 host.Documents.Views.ShowNote(idOrder);
