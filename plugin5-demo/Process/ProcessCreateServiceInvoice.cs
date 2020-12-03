@@ -25,7 +25,6 @@ namespace plugin5_demo.Process
                 invoice.Description = "Sample text of a service invoice";
                 invoice.AmountBaseVAT1 = 100;
                 invoice.CodeVAT1 = codeVAT.ToString();
-                invoice.MethodPaymentCode = "PAGARE";
 
                 // The invoice is created
                 long id = await host.Documents.CreateSalesInvoiceAsync(invoice);

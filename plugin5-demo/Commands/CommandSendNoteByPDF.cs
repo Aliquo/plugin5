@@ -43,36 +43,12 @@ namespace plugin5_demo.Commands
                     Aliquo.Core.Models.Note note = await this.Host.Documents.GetNoteAsync(idNote);
 
                     // The assistant is configured
-                    var wizard = new Aliquo.Windows.Wizard.WizardView();
-                    var wizardStep = new Aliquo.Windows.Wizard.WizardStep();
+                    System.Text.StringBuilder settings = new System.Text.StringBuilder();
+                    settings.AppendFormat("<? NAME='Email' TYPE='STRING' TEXT='E-mail' STYLE='EMAIL' REQUIRED=1>");
+                    settings.AppendFormat("<? NAME='Subject' TYPE='STRING' TEXT='Subject' DEFAULT='Delivery note material {0}'>", Aliquo.Core.Formats.SerialAndNumber(note.SerialCode, note.Number));
+                    settings.AppendFormat("<? NAME='Message' TYPE='STRING' TEXT='Message' DEFAULT='Enclosed we send you information about the delivery of the {0}.' ROWS=9 LENGTH=2048>", Aliquo.Core.Formats.SerialAndNumber(note.SerialCode, note.Number));
 
-                    wizardStep.AddControl(new Aliquo.Windows.Wizard.Controls.WizardText()
-                    {
-                        Name = "Email",
-                        Text = "E-mail",
-                        Required = true,
-                        Style = Aliquo.Windows.Wizard.Styles.WizardTextStyle.Email
-                    });
-
-                    wizardStep.AddControl(new Aliquo.Windows.Wizard.Controls.WizardText()
-                    {
-                        Name = "Subject",
-                        Text = "Subject",
-                        Default = $"Delivery note material {Aliquo.Core.Formats.SerialAndNumber(note.SerialCode, note.Number)}"
-                    });
-
-                    wizardStep.AddControl(new Aliquo.Windows.Wizard.Controls.WizardText()
-                    {
-                        Name = "Message",
-                        Text = "Message",
-                        Default = $"Enclosed we send you information about the delivery of the {Aliquo.Core.Formats.SerialAndNumber(note.SerialCode, note.Number)}.",
-                        Rows = 9,
-                        Length = 2048
-                    });
-
-                    wizard.AddStep(wizardStep);
-
-                    ITask task = this.Host.Management.Views.WizardCustom(PlugInTitle, string.Empty, wizard);
+                    ITask task = this.Host.Management.Views.WizardCustom(PlugInTitle, string.Empty, settings.ToString());
 
                     task.Finishing += ExecuteWizardFinishingAsync;
 

@@ -17,51 +17,12 @@ namespace plugin5_demo.Process
                 this.Host = host;
 
                 // The assistant is configured
-                var wizard = new Aliquo.Windows.Wizard.WizardView();
-                var wizardStep = new Aliquo.Windows.Wizard.WizardStep();
+                System.Text.StringBuilder settings = new System.Text.StringBuilder();
+                settings.AppendFormat("<? NAME='CustomerCode' TYPE='STRING' TEXT='Customer' WIDTH=100 TABLE='Clientes' FIELD='Codigo' FIELDTEXT='Nombre' REQUIRED=1>");
+                settings.AppendFormat("<? NAME='DateNote' TYPE='DATE' TEXT='Date' WIDTH=100 REQUIRED=1 DEFAULT='{0}'>", this.Host.Environment.WorkDate);
+                settings.AppendFormat("<? NAME='ProductCode' TYPE='STRING' TEXT='Product' WIDTH=100 TABLE='Articulos' FIELD='Codigo' FIELDTEXT='Nombre' REQUIRED=1>");
 
-                Aliquo.Windows.Wizard.Controls.WizardText wizardTableClientes = new Aliquo.Windows.Wizard.Controls.WizardText()
-                {
-                    Name = "CustomerCode",
-                    Text = "Customer",
-                    Width = 100,
-                    Required = true
-                };
-                wizardTableClientes.SetLink(new Aliquo.Windows.Wizard.Link.WizardTableLink()
-                {
-                    Table = "Clientes",
-                    FieldKey = "Codigo",
-                    FieldText = "Nombre"
-                });
-                wizardStep.AddControl(wizardTableClientes);
-
-                wizardStep.AddControl(new Aliquo.Windows.Wizard.Controls.WizardDateTime()
-                {
-                    Name = "DateNote",
-                    Text = "Date",
-                    Default = this.Host.Environment.WorkDate,
-                    Width = 100,
-                    Required = true
-                });
-
-                Aliquo.Windows.Wizard.Controls.WizardText wizardTableArticulos = new Aliquo.Windows.Wizard.Controls.WizardText()
-                {
-                    Name = "ProductCode",
-                    Text = "Product",
-                    Width = 100,
-                    Required = true
-                };
-                wizardTableArticulos.SetLink(new Aliquo.Windows.Wizard.Link.WizardTableLink()
-                {
-                    Table = "Articulos",
-                    FieldKey = "Codigo",
-                    FieldText = "Nombre"
-                });
-                wizardStep.AddControl(wizardTableArticulos);
-
-                wizard.AddStep(wizardStep);
-
-                ITask task = host.Management.Views.WizardCustom("Create new document with wizard", string.Empty, wizard);
+                ITask task = host.Management.Views.WizardCustom("Create new document with wizard", string.Empty, settings.ToString());
 
                 task.Finishing += ExecuteWizardFinishingAsync;
 
