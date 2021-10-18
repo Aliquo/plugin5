@@ -62,7 +62,7 @@ namespace plugin5_demo.Process
                     Name = "TimeShort",
                     Text = "Time short",
                     Default = DateTime.Now.ToString(),
-                    Style = WizardDateTimeStyle.Timeshort
+                    Style = WizardDateTimeStyle.TimeShort
                 });
 
                 // With STEP we mark on which screen we want to show the control

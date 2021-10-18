@@ -9,7 +9,7 @@
              xmlns:aliquo="clr-namespace:Aliquo.Windows;assembly=Aliquo.Windows"
              xmlns:aliquoControls="clr-namespace:Aliquo.Windows.Controls;assembly=Aliquo.Windows.Controls" 
              xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
-             mc:Ignorable="d" d:DesignWidth="2024">
+             mc:Ignorable="d" d:DesignWidth="1024">
 
     <UserControl.Resources>
         <ResourceDictionary>

@@ -87,8 +87,8 @@ namespace plugin5_demo.Process
             if (!String.IsNullOrWhiteSpace(control.Text))
             {
                 // The control is searched in the list
-                System.Windows.Forms.Control controlSourceText = controls.FirstOrDefault(t => t.Key == "SourceText").Value;
-                System.Windows.Forms.Control controlTargetText = controls.FirstOrDefault(t => t.Key == "TargetText").Value;
+                System.Windows.Forms.Control controlSourceText = this.controls.FirstOrDefault(t => t.Key == "SourceText").Value;
+                System.Windows.Forms.Control controlTargetText = this.controls.FirstOrDefault(t => t.Key == "TargetText").Value;
 
                 // The value of the property is assigned
                 controlTargetText.Text = controlSourceText.Text;

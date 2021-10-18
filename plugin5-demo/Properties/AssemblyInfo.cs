@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PlugIn name and description")]
-[assembly: AssemblyDescription("Support: soporte@desarrollo.com")] 
+[assembly: AssemblyDescription("Support: <a href='mailto:soporte@desarrollo.com'>soporte@desarrollo.com</a>")] 
 [assembly: AssemblyCompany("Development company name")]
 [assembly: AssemblyProduct("XX customization for Aliquo Software")]
-[assembly: AssemblyCopyright("© 2020 Development company name")]
+[assembly: AssemblyCopyright("© 2021 Development company name")]
 [assembly: AssemblyTrademark("PlugIn")]
 [assembly: AssemblyCulture("")]
 

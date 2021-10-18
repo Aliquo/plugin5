@@ -98,15 +98,34 @@ namespace plugin5_demo.Process
                 note.PropertyCode = customerCode;
                 note.Date = dateNote;
 
-                Aliquo.Core.Models.Line line = new Aliquo.Core.Models.Line
-                {
-                    Type = Aliquo.Core.LineType.Product,
-                    Code = productCode,
-                    Quantity = 4
-                };
+                // Get info product
+                Aliquo.Core.Models.RateQuery rateQuery = new Aliquo.Core.Models.RateQuery();
+                rateQuery.Type = note.Type;
+                rateQuery.Date = note.Date;
+                rateQuery.PropertyCode = note.PropertyCode;
 
-                // The line is assigned to the model list
-                note.Lines.Add(line);
+                rateQuery.ProductCode = productCode;
+                rateQuery.Quantity = 4;
+
+                List<Aliquo.Core.Models.InfoProduct> listOfInfoProduct = await Host.Documents.GetRatesQueryAsync(rateQuery);
+
+                foreach (Aliquo.Core.Models.InfoProduct lineInfoProduct in listOfInfoProduct)
+                {
+                    // Prepare the line of note
+                    Aliquo.Core.Models.Line line = new Aliquo.Core.Models.Line
+                    {
+                        Type = Aliquo.Core.LineType.Product,
+                        Code = lineInfoProduct.Code,
+                        Name = lineInfoProduct.Name,
+                        Quantity = lineInfoProduct.Quantity,
+                        Price = lineInfoProduct.Price,
+                        CodeVAT = lineInfoProduct.CodeVAT,
+                        PercentDiscount = lineInfoProduct.PercentDiscount
+                    };
+
+                    // The line is assigned to the model list
+                    note.Lines.Add(line);
+                }
 
                 // Call the function to create the note                
                 long id = await Host.Documents.SetNoteAsync(note);

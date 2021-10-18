@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="plugin5_demo.Views.DataGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"   
+             xmlns:properties="clr-namespace:Aliquo.Windows.Properties;assembly=Aliquo.Windows"     
+             xmlns:alqwc="clr-namespace:Aliquo.Windows.Controls;assembly=Aliquo.Windows.Controls"
+             xmlns:alqw="clr-namespace:Aliquo.Windows.Controls;assembly=Aliquo.Windows"
+             xmlns:alqwconverters="clr-namespace:Aliquo.Windows;assembly=Aliquo.Windows"
+             xmlns:aliqw ="clr-namespace:Aliquo.Windows;assembly=Aliquo.Windows"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:plugin5_demo.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows;Component/Themes/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows.Controls;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows.Controls;Component/Themes/SfDataGridControlStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <alqwconverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></alqwconverters:BooleanToVisibilityConverter>
+            <aliqw:AddInputKeyToStringConverter x:Key="AddInputKey" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
+    </UserControl.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <fluent:Ribbon Grid.Row="0" Name="Ribbon">
+            <fluent:RibbonTabItem Header="General" >
+                <fluent:RibbonGroupBox>
+                    <fluent:Button Header="{x:Static properties:Resources.Refresh}" 
+                                   Command="{Binding ViewCommand}" CommandParameter="refresh"
+                                   ToolTip="{Binding Header, RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey}, ConverterParameter='F5'}"
+                                   Icon="/Aliquo.Windows;component/Images/refresh.png"
+                                   LargeIcon="/Aliquo.Windows;component/Images/refresh_large.png" 
+                                   Size="Large" />
+                    <fluent:Button Header="Configurar" 
+                                   Command="{Binding ViewCommand}"  CommandParameter="setup"
+                                   LargeIcon="/Aliquo.Windows;component/Images/setup_large.png"
+                                   Icon="/Aliquo.Windows;component/Images/setup.png" Size="Large"/>
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+        </fluent:Ribbon>
+        <alqwc:DataGrid     x:Name="datagrid"                        
+                            Grid.Row="1"
+                            Host="{Binding Host}"
+                            SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Tables="{Binding Tables, Mode=OneWay}"
+                            Fields="{Binding Fields, Mode=OneWay}"                             
+                            VisibleSummaryRow="False"
+                            Condition="{Binding Condition, Mode=OneWay}"
+                            AllowResizingColumns="True"
+                            AllowMultiSelect="False"                                 
+                            VerticalAlignment="Stretch" 
+                            HorizontalAlignment="Stretch" >
+            <i:Interaction.Behaviors>
+                <alqwc:MethodToCommandBehavior Method="Load" Command="{Binding RefreshCommand, Mode=OneWay}" />
+                <alqwc:MethodToCommandBehavior Method="ConfigureFields" Command="{Binding SetupCommand, Mode=OneWay}" />
+                <alqwc:EventToMethodBehavior 
+                    EventName="ConfigureFieldsAfter" 
+                    Method="SaveVisibleFields"
+                    EventHandlerPropertyName="Handled"
+                    Arg1="{alqwc:EventArgsSource PropertyPath=VisibleFields}"
+                    Arg2="{alqwc:EventArgsSource PropertyPath=Restore}" />
+            </i:Interaction.Behaviors>
+
+        </alqwc:DataGrid>
+
+        <alqw:BusyIndicator Grid.Row="1" Grid.Column="0" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" >
+        </alqw:BusyIndicator>
+
+        <fluent:StatusBar Grid.Row="2" Name="StatusBar" >
+            <fluent:StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <Path Data="{DynamicResource rows}" />
+                    <TextBlock Text="{x:Static properties:Resources.StatusBar_RowsCount}" Margin="4,0,0,0" />
+                    <TextBlock Text="{Binding ElementName=datagrid, Path=TotalRows, Mode=OneWay, StringFormat={}{0:N0}}" />
+                </StackPanel>
+            </fluent:StatusBarItem>
+        </fluent:StatusBar>
+    </Grid>
+</UserControl>

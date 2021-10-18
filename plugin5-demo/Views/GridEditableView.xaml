@@ -1,0 +1,354 @@
+﻿<UserControl x:Class="plugin5_demo.Views.GridEditableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:aw="clr-namespace:Aliquo.Windows;assembly=Aliquo.Windows"
+             xmlns:awr="clr-namespace:Aliquo.Windows.Properties;assembly=Aliquo.Windows"
+             xmlns:alqwc="clr-namespace:Aliquo.Windows.Controls;assembly=Aliquo.Windows.Controls"
+             xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
+             xmlns:awc="clr-namespace:Aliquo.Windows.Controls;assembly=Aliquo.Windows"
+             xmlns:syncf="http://schemas.syncfusion.com/wpf"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:converters="clr-namespace:Aliquo.Windows.Controls.Converters;assembly=Aliquo.Windows.Controls"
+             xmlns:lr="clr-namespace:plugin5_demo.Properties"
+             xmlns:local="clr-namespace:plugin5_demo.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!--Merged Dictionaries-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Aliquo.Windows;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows.Controls;Component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>           
+            <!--Converters-->
+            <aw:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <aw:BooleanToVisibilityConverter  x:Key="InverseBooleanToVisibilityConverter" IsReversed="True" />
+            <aw:AddInputKeyToStringConverter x:Key="AddInputKey" />
+            <aw:InputKeyToStringConverter x:Key="InputKey" />
+            <converters:GridNewRowInitiatingEventDataConverter x:Key="GridNewRowInitiatingEventDataConverter" />
+            <converters:GridCellValidatedEventDataConverter x:Key="GridCellValidatedEventDataConverter" />
+            <converters:GridAddNewRowPositionFromBooleanConverter x:Key="GridAddNewRowPositionFromBooleanConverter" />
+            <converters:GridAddNewRowPositionFromBooleanConverter x:Key="GridAddNewRowFromBooleanConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="N"
+                    Modifiers="Control+Shift"
+                    Command="{Binding ViewCommand}"
+                    CommandParameter="additem" />
+        <KeyBinding Key="M"
+                    Modifiers="Control"
+                    Command="{Binding ViewCommand}"
+                    CommandParameter="modify" />
+        <KeyBinding Key="Delete"
+                    Modifiers="Control+Shift"
+                    Command="{Binding ViewCommand}"
+                    CommandParameter="deleteitem" />
+        <KeyBinding Key="D"
+                    Modifiers="Control+Shift"
+                    Command="{Binding ViewCommand}"
+                    CommandParameter="duplicateitem" />
+        <KeyBinding Key="F5"
+                    Command="{Binding ViewCommand}"
+                    CommandParameter="refresh" />
+        <KeyBinding Key="F12"
+                    Modifiers="Control"
+                    Command="{Binding ViewCommand}"
+                    CommandParameter="accept" />
+        <KeyBinding Key="Escape"
+                    Modifiers="Shift"
+                    Command="{Binding ViewCommand}"
+                    CommandParameter="cancel" />
+
+
+    </UserControl.InputBindings>
+    <UserControl.ToolTip>
+        <StackPanel x:Name="ToolTipTable"
+                    Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Description}" />
+            </StackPanel>
+        </StackPanel>
+    </UserControl.ToolTip>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <fluent:Ribbon Grid.Row="0"
+                       Name="Ribbon"
+                       SelectedTabIndex="0">
+            <fluent:RibbonTabItem Header="{x:Static awr:Resources.General}">
+                <fluent:RibbonGroupBox>
+                    <fluent:Button Header="{x:Static awr:Resources.Modify}"
+                                   Command="{Binding ViewCommand}"
+                                   Visibility="{Binding IsEditing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                                   CommandParameter="modify"
+                                   LargeIcon="/Aliquo.Windows;component/Images/edit_large.png"
+                                   Size="Large"
+                                   ToolTip="{Binding Header,RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey},ConverterParameter='Ctrl+M'}" />
+
+                    <fluent:Button Header="{x:Static awr:Resources.Refresh}"
+                                   Command="{Binding ViewCommand}"
+                                   Visibility="{Binding IsEditing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                                   CommandParameter="refresh"
+                                   LargeIcon="/Aliquo.Windows;component/Images/refresh_large.png"
+                                   Size="Large"
+                                   ToolTip="{Binding Header,RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey},ConverterParameter='F5'}" />
+
+                    <fluent:Button Header="{x:Static awr:Resources.Accept}"
+                                   Command="{Binding ViewCommand}"
+                                   Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   CommandParameter="accept"
+                                   LargeIcon="/Aliquo.Windows;component/Images/accept_large.png"
+                                   Size="Large"
+                                   ToolTip="{Binding Header,RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey},ConverterParameter='Ctrl+F12'}" />
+
+                    <fluent:Button Header="{x:Static awr:Resources.Cancel}"
+                                   Command="{Binding ViewCommand}"
+                                   Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   CommandParameter="cancel"
+                                   LargeIcon="/Aliquo.Windows;component/Images/close_large.png"
+                                   Size="Large"
+                                   ToolTip="{Binding Header,RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey},ConverterParameter='Shift+Escape'}" />
+
+                </fluent:RibbonGroupBox>               
+                <fluent:RibbonGroupBox Header="{x:Static awr:Resources.Lines}"
+                                       Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+
+                    <fluent:Button Header="{x:Static awr:Resources.Insert}"
+                                   Command="{Binding ViewCommand}"
+                                   CommandParameter="additem"
+                                   ToolTip="{Binding Header,RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey},ConverterParameter='Ctrl+Shift+N'}"
+                                   Icon="/Aliquo.Windows;component/Images/items_insert.png"
+                                   Size="Middle" />
+
+                    <fluent:Button Header="{x:Static awr:Resources.Duplicate}"
+                                   Command="{Binding ViewCommand}"
+                                   CommandParameter="duplicateitem"
+                                   ToolTip="{Binding Header,RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey},ConverterParameter='Ctrl+Shift+D'}"
+                                   Icon="/Aliquo.Windows;component/Images/items_duplicate.png"
+                                   Size="Middle" />
+
+                    <fluent:Button Header="{x:Static awr:Resources.Delete}"
+                                   Command="{Binding ViewCommand}"
+                                   CommandParameter="deleteitem"
+                                   ToolTip="{Binding Header,RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey},ConverterParameter='Ctrl+Shift+Delete'}"
+                                   Icon="/Aliquo.Windows;component/Images/items_delete.png"
+                                   Size="Middle" />
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+        </fluent:Ribbon>
+        <syncf:SfDataGrid x:Name="dataGrid"
+                          Grid.Row="1"
+                          GridValidationMode="InView"
+                          ItemsSource="{Binding Items, Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItems="{Binding SelectedItems,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          AutoGenerateColumns="False"
+                          SelectionMode="Extended"
+                          NavigationMode="Cell"
+                          ShowRowHeader="True"
+                          ColumnSizer="None"
+                          AddNewRowPosition="{Binding IsEditing, Converter={StaticResource GridAddNewRowFromBooleanConverter}}"
+                          NewItemPlaceholderPosition="AtEnd"
+                          EditorSelectionBehavior="SelectAll"
+                          Margin="0, 10, 0 ,0"
+                          AllowSorting="False"
+                          AllowResizingColumns="True"
+                          AllowEditing="{Binding IsEditing}"
+                          AllowDraggingColumns="True"
+                          AllowDraggingRows="{Binding IsEditing}"
+                          AllowDrop="True"
+                          AllowFiltering="True"
+                          alqwc:SfDataGridBehavior.ShowAllFields="{Binding ShowAllFields, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <syncf:SfDataGrid.Columns>
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.ProductCod}"
+                                                   MappingName="Codigo"
+                                                   TextAlignment="Left"
+                                                   Required="true"
+                                                   Width="125" />
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.ProductName}"
+                                                   MappingName="Nombre"
+                                                   TextAlignment="Left"
+                                                   Required="true"
+                                                   Width="220"/>
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.FamilyCod}"
+                                                   MappingName="CodFamilia"
+                                                   LinkButtonVisible="True"
+                                                   LinkButtonCommand="{Binding LinkCommand}"
+                                                   LinkButtonCommandParameter="{Binding MappingName, RelativeSource={RelativeSource Self}}"
+                                                   LocationScreen="{Binding ElementLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
+                                                   TextAlignment="Left"
+                                                   Width="125" />
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.FamilyName}"
+                                                   MappingName="NombreFamilia"
+                                                   LinkButtonVisible="True"
+                                                   LinkButtonCommand="{Binding LinkCommand}"
+                                                   LinkButtonCommandParameter="{Binding MappingName, RelativeSource={RelativeSource Self}}"
+                                                   LocationScreen="{Binding ElementLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
+                                                   TextAlignment="Left"
+                                                   Width="160"/>
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.SubfamilyCod}"
+                                                   MappingName="CodSubFamilia"
+                                                   LinkButtonVisible="True"
+                                                   LinkButtonCommand="{Binding LinkCommand}"
+                                                   LinkButtonCommandParameter="{Binding MappingName, RelativeSource={RelativeSource Self}}"
+                                                   LocationScreen="{Binding ElementLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
+                                                   TextAlignment="Left"
+                                                   Width="125" />
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.SubfamilyName}"
+                                                   MappingName="NombreSubFamilia"
+                                                   LinkButtonVisible="True"
+                                                   LinkButtonCommand="{Binding LinkCommand}"
+                                                   LinkButtonCommandParameter="{Binding MappingName, RelativeSource={RelativeSource Self}}"
+                                                   LocationScreen="{Binding ElementLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
+                                                   TextAlignment="Left"
+                                                   Width="160"/>
+                
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.AverageCost}"
+                                                   DisplayBinding="{Binding Path=CosteMedio, StringFormat={}{0:N2},Mode=TwoWay}"
+                                                   MappingName="CosteMedio"                                                   
+                                                   TextAlignment="Right"
+                                                   HorizontalHeaderContentAlignment="Right"
+                                                   AllowFiltering="false"
+                                                   AllowEditing="false"                                              
+                                                   ValidationMode="Decimal"
+                                                   Width="120"/>
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.Price}"
+                                                   DisplayBinding="{Binding Path=PrecioVenta, StringFormat={}{0:N2},Mode=TwoWay}"
+                                                   MappingName="PrecioVenta"                                                   
+                                                   TextAlignment="Right"
+                                                   HorizontalHeaderContentAlignment="Right"
+                                                   AllowFiltering="False"
+                                                   ValidationMode="Decimal"
+                                                   Width="120"/>
+            </syncf:SfDataGrid.Columns>
+
+            <i:Interaction.Behaviors>
+                <alqwc:SfDataGridBehavior x:Name="dataGridBehavior"
+                                          AddFillColumn="True"
+                                          ShowRecordIndex="True"
+                                          VisibleFields="{Binding VisibleFields}"
+                                          UseAdvancedFieldSettings="False">
+
+                    <i:Interaction.Behaviors>
+
+                        <!--MethodToCommand-->
+                        <alqwc:MethodToCommandBehavior Method="CommitAddNew"
+                                                       Command="CommitAddNewCommand"
+                                                       Target="{Binding ElementName=dataGrid, Path=DataContext}" />
+
+                        <alqwc:MethodToCommandBehavior Method="ScrollInView"
+                                                       Target="{Binding ElementName=dataGrid, Path=DataContext}"
+                                                       Command="ScrollInViewCommand" />
+
+                        <alqwc:MethodToCommandBehavior Method="ConfigureFields"
+                                                       Command="ConfigureFieldsCommand"
+                                                       Target="{Binding ElementName=dataGrid, Path=DataContext}" />
+
+                        <alqwc:EventToMethodBehavior    EventName="ConfigureFieldsAfter" 
+                                                        Method="SaveVisibleFields"
+                                                        Target="{Binding ElementName=dataGrid, Path=DataContext}"
+                                                        EventHandlerPropertyName="Handled"
+                                                        Arg1="{alqwc:EventArgsSource PropertyPath=VisibleFields}"
+                                                        Arg2="{alqwc:EventArgsSource PropertyPath=Restore}" />
+
+                        <alqwc:MethodToCommandBehavior Method="ClearFilters"
+                                                       Command="ClearFiltersCommand"
+                                                       Target="{Binding ElementName=dataGrid, Path=DataContext}" />
+
+                        <alqwc:MethodToCommandBehavior Method="ScrollInView"
+                                                       Command="ScrollInViewCommand"
+                                                       Target="{Binding ElementName=dataGrid, Path=DataContext}" />
+
+                    </i:Interaction.Behaviors>
+                </alqwc:SfDataGridBehavior>
+
+
+                <!--EventToMethod-->
+                <alqwc:EventToMethodBehavior EventName="AddNewRowInitiating"
+                                             Method="AddNewRowInitiating"
+                                             Arg1="{alqwc:EventArgsSource Converter={StaticResource GridNewRowInitiatingEventDataConverter}}" />
+
+                <alqwc:EventToMethodBehavior EventName="CurrentCellValidated"
+                                             Method="CurrentCellValidatedAsync"
+                                             Arg1="{alqwc:EventArgsSource Converter={StaticResource GridCellValidatedEventDataConverter}}" />
+
+            </i:Interaction.Behaviors>
+
+            <!--Menu contextual de opciones de configuracion-->
+            <syncf:SfDataGrid.ContextMenu>
+                <ContextMenu>
+                    <!--Solo visibles en edicion -->
+                    <MenuItem Header="{x:Static awr:Resources.Insert}"
+                              InputGestureText="{Binding Converter={StaticResource InputKey}, ConverterParameter='Ctrl+Shift+N'}"
+                              x:Name="AddMenuItem"
+                              Command="{Binding ViewCommand}"
+                              CommandParameter="add"
+                              Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Aliquo.Windows;component/Images/items_insert.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{x:Static awr:Resources.Duplicate}"
+                              InputGestureText="{Binding Converter={StaticResource InputKey}, ConverterParameter='Ctrl+Shift+D'}"
+                              x:Name="DuplicateMenuItem"
+                              Command="{Binding ViewCommand}"
+                              CommandParameter="duplicate"
+                              Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Aliquo.Windows;component/Images/items_duplicate.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{x:Static awr:Resources.Delete}"
+                              InputGestureText="{Binding Converter={StaticResource InputKey}, ConverterParameter='Ctrl+Shift+Delete'}"
+                              x:Name="DeleteMenuItem"
+                              Command="{Binding ViewCommand}"
+                              CommandParameter="delete"
+                              Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Aliquo.Windows;component/Images/items_delete.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <MenuItem x:Name="ClearAutoFiltersMenuItem"
+                              Header="{x:Static awr:Resources.Autofilter_Empty}"
+                              Command="{Binding ClearFiltersCommand}"
+                              InputGestureText="{Binding Converter={StaticResource InputKey}, ConverterParameter='Shift+F3'}">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Aliquo.Windows;component/Images/autofilter_delete.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <!--Siempre visibles -->
+                    <MenuItem x:Name="ConfigureMenuItem"
+                              Command="{Binding ConfigureFieldsCommand}"                              
+                              Header="{x:Static awr:Resources.Configure}">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/Aliquo.Windows;component/Images/setup.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </syncf:SfDataGrid.ContextMenu>
+
+        </syncf:SfDataGrid>
+        <awc:BusyIndicator Grid.Row="1"
+                           Grid.Column="0"
+                           Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+        </awc:BusyIndicator>
+        <fluent:StatusBar Grid.Row="2" x:Name="StatusBar" >
+            <fluent:StatusBarItem HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+
+                </StackPanel>
+            </fluent:StatusBarItem>
+        </fluent:StatusBar>
+    </Grid>
+</UserControl>

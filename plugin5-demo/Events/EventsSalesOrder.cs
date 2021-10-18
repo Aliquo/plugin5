@@ -3,6 +3,7 @@ using Aliquo.Windows.Extensibility;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 
 namespace plugin5_demo.Events
 {
@@ -11,15 +12,70 @@ namespace plugin5_demo.Events
     [Export(typeof(ViewEvents))]
     [ViewEventsMetadata(ViewStyle = ViewStyle.Normal,
                         ViewType = ViewType.SalesOrder)]
-    class EventsSalesOrder : ViewEvents
+    class EventsSalesOrder : ViewNoteEvents
     {
+
+        public EventsSalesOrder()
+        {
+            this.BeforeShowData += EventsSalesOrder_BeforeShowData;
+            this.AfterShowData += EventsSalesOrder_AfterShowData;
+
+            this.Loaded += EventsSalesOrder_Loaded;
+            this.Closing += EventsSalesOrder_Closing;
+            this.Closed += EventsSalesOrder_Closed;
+
+            this.DataDeleting += EventsSalesOrder_DataDeleting;
+            this.DataDeleted += EventsSalesOrder_DataDeleted;
+
+            this.DataUpdating += EventsSalesOrder_DataUpdating;
+            this.DataUpdated += EventsSalesOrder_DataUpdated;
+
+            this.SelectionChanged += EventsSalesOrder_SelectionChanged;
+        }
+
+        /// <summary>Event that occurs before the data has displayed</summary>
+        private void EventsSalesOrder_BeforeShowData(object sender, EventArgs e)
+        {
+            if (console == null)
+                CreateConsoleWindow((IViewNote)sender);
+
+            this.console?.Append("EventsSalesOrder_BeforeShowData");
+
+            IViewNote view = ((IViewNote)sender);
+
+            // An example to get all the public information of the Note class
+            Aliquo.Core.Models.Note note = view.GetNote();
+
+            this.console?.Append($"Reference: {note.Reference?.ToString()}");
+
+            if (view.IsEditing() && note.MethodPaymentCode == null)
+            {
+                IHost host = ((IView)sender).GetHost();
+
+                object methodPayment = Task.Run(async () => await host.Management.GetDataValueAsync("MediosPago", "Codigo", null, "id")).Result;
+
+                this.console?.Append($"The first method payment is {methodPayment}");
+
+                view.SetNoteValue(nameof(note.MethodPaymentCode), methodPayment);
+            }
+        }
+
+        /// <summary>Event that occurs after the data has displayed</summary>
+        private void EventsSalesOrder_AfterShowData(object sender, EventArgs e)
+        {
+            this.console?.Append("EventsSalesOrder_AfterShowData");
+
+            IViewNote view = ((IViewNote)sender);
+
+            if (view.IsEditing())
+            {
+                view.SetNoteValue(nameof(Aliquo.Core.Models.Note.TransportAmount), 100);
+            }
+        }
 
         /// <summary>Event that occurs when the view has been loaded</summary>
         private void EventsSalesOrder_Loaded(object sender, EventArgs e)
         {
-            if (console == null)
-                CreateConsoleWindow((IView)sender);
-
             this.console?.Append("EventsSalesOrder_Loaded");
         }
 
@@ -57,13 +113,31 @@ namespace plugin5_demo.Events
             Aliquo.Core.Models.Note oldData = (Aliquo.Core.Models.Note)e.OldData;
             Aliquo.Core.Models.Note newData = (Aliquo.Core.Models.Note)e.NewData;
 
-            this.console?.Append($"EventsSalesOrder_NoteUpdating (Cancel={e.Cancel}, oldData.Reference={oldData.Reference}, newData.Reference={newData.Reference})");
+            this.console?.Append($"EventsSalesOrder_NoteUpdating (Cancel={e.Cancel}, oldData.Reference={oldData?.Reference}, newData.Reference={newData.Reference})");
+
+            IViewNote view = ((IViewNote)sender);
+
+            // You can change the data before save
+
+            object oldReference = view.GetNoteValue("Reference"); 
+
+            this.console?.Append($"Old reference: {oldReference?.ToString()}");
+
+            view.SetNoteValue("Reference", "Reference from PlugIn"); 
+
+            object newReference = view.GetNoteValue("Reference");
+
+            this.console?.Append($"New reference: {newReference?.ToString()}");
         }
 
         /// <summary>Event that occurs after updating the note</summary>
         private void EventsSalesOrder_DataUpdated(object sender, DataUpdatedEventArgs e)
         {
             this.console?.Append("EventsSalesOrder_NoteUpdated");
+
+            Aliquo.Core.Models.Note oldData = (Aliquo.Core.Models.Note)e.OldData;
+            Aliquo.Core.Models.Note newData = (Aliquo.Core.Models.Note)e.NewData;
+
         }
 
         /// <summary>Event that occurs when the selection changes</summary>
@@ -82,23 +156,8 @@ namespace plugin5_demo.Events
 
         private ViewModels.EventsConsoleViewModel console;
 
-        public EventsSalesOrder()
-        {
-            this.Loaded += EventsSalesOrder_Loaded;
-            this.Closing += EventsSalesOrder_Closing;
-            this.Closed += EventsSalesOrder_Closed;
-
-            this.DataDeleting += EventsSalesOrder_DataDeleting;
-            this.DataDeleted += EventsSalesOrder_DataDeleted;
-
-            this.DataUpdating += EventsSalesOrder_DataUpdating;
-            this.DataUpdated += EventsSalesOrder_DataUpdated;
-
-            this.SelectionChanged += EventsSalesOrder_SelectionChanged;
-        }
-
         /// <summary>Activate the window to update the events received</summary>
-        private void CreateConsoleWindow(IView view)
+        private void CreateConsoleWindow(IViewNote view)
         {
             var host = view.GetHost();
 

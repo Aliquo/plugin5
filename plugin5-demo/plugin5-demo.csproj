@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\..\..\Program Files %28x86%29\Aliquo Software 5\PlugIn\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\..\Program Files %28x86%29\Aliquo Software 5\PlugIn\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -87,14 +87,20 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandHome.cs" />
+    <Compile Include="Commands\CommandModifyNoteWithWizard.cs" />
     <Compile Include="Commands\CommandCreateNoteWithWizard.cs" />
     <Compile Include="Commands\CommandLockCustomer.cs" />
     <Compile Include="Commands\CommandShowRiskCustomer.cs" />
     <Compile Include="Events\EventsCustomer.cs" />
+    <Compile Include="Events\EventsInvoiceSupplier.cs" />
     <Compile Include="Events\EventsSalesOrder.cs" />
     <Compile Include="Examples\Management\GetDataValueAsync.cs" />
     <Compile Include="Examples\Management\UpdateDataAsync.cs" />
     <Compile Include="Examples\Management\UpdateDataConditionedAsync.cs" />
+    <Compile Include="Helpers\DataAccess.cs" />
+    <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Process\ProcessUpdateInvoicePayments.cs" />
     <Compile Include="Process\ProcessCreateServiceInvoice.cs" />
     <Compile Include="Process\ProcessDeliverOrder.cs" />
@@ -113,15 +119,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DataGridViewModel.cs" />
     <Compile Include="ViewModels\EventsConsoleViewModel.cs" />
+    <Compile Include="ViewModels\GridEditableViewModel.cs" />
+    <Compile Include="ViewModels\SingleItemEditableViewModel.cs" />
     <Compile Include="Views\CodeView.xaml.cs">
       <DependentUpon>CodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ControlsView.xaml.cs">
       <DependentUpon>ControlsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DataGridView.xaml.cs">
+      <DependentUpon>DataGridView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EventsConsole.xaml.cs">
       <DependentUpon>EventsConsole.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GridEditableView.xaml.cs">
+      <DependentUpon>GridEditableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GridView.xaml.cs">
       <DependentUpon>GridView.xaml</DependentUpon>
@@ -132,11 +147,15 @@
     <Compile Include="Views\ListQuery.xaml.cs">
       <DependentUpon>ListQuery.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SingleItemEditableView.xaml.cs">
+      <DependentUpon>SingleItemEditableView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +167,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DataGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EventsConsole.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GridEditableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ListQuery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SingleItemEditableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
