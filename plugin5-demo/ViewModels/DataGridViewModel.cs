@@ -1,7 +1,7 @@
 ﻿using Aliquo.Windows;
 using Aliquo.Windows.Base;
+using Aliquo.Windows.Controls;
 using Aliquo.Windows.Controls.Models;
-using Aliquo.Windows.Controls.Models.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -50,6 +50,16 @@ namespace plugin5_demo.ViewModels
                 return fields;
             }
             set { SetProperty(ref fields, value); }
+        }
+
+        private byte fixedColumn;
+        /// <summary>
+        /// Numero de columnas fijas en el grid, será el elemento a bindear con SfDataGridBehavior.FrozenColumnCount
+        /// </summary>
+        public byte FixedColumns
+        {
+            get { return fixedColumn; }
+            set { SetProperty(ref fixedColumn, value); }
         }
 
         private string tables;
@@ -146,20 +156,29 @@ namespace plugin5_demo.ViewModels
             Task.Run(async () => await CreateFieldsAsync());
             IsBusy = false;
         }
-        public async Task<bool> SaveVisibleFields(System.Collections.Generic.List<Aliquo.Windows.Controls.Models.FieldSetting> fields, bool restore)
+
+        /// <summary>
+        /// En este caso se pasa el objeto ConfigureFieldsAfterEventArgs para poder actualizar la propiedad Handled
+        /// ya que al haber llamadas asincronas, se devuelve la ejecucion sin poder devolver el valor correcto.
+        /// </summary>
+        public async void SaveVisibleFields(ConfigureFieldsAfterEventArgs args)
         {
-            bool handleEvent = false;
-            if (restore)
+            args.Handled = false;
+            if (args.Restore)
             {
-                handleEvent = true;
+                args.Handled = true;
                 await Host.Configuration.SetCustomSettingsAsync(settingsCode, null, true);
                 await CreateFieldsAsync();
+                FixedColumns = 0;
             }
             else
             {
-                await Host.Configuration.SetCustomSettingsAsync(settingsCode, Aliquo.Core.Serialization.JsonSerializeObject(fields), true);
+                // guardar la nueva configuración
+                GridSettings gridSettings = new GridSettings();
+                gridSettings.Fields = args.VisibleFields.ToFields();
+                gridSettings.FixedColumns = args.FixedColumns;
+                await Host.Configuration.SetCustomSettingsAsync(settingsCode, Aliquo.Core.Serialization.JsonSerializeObject(gridSettings), true);
             }
-            return handleEvent;
         }
         public void Dispose()
         {
@@ -182,9 +201,11 @@ namespace plugin5_demo.ViewModels
             }
             else
             {
-                //Se ponen las columnas definidas por el usuario
-                var visibleFields = Aliquo.Core.Serialization.JsonDeserializeObject<ObservableCollection<Aliquo.Windows.Controls.Models.Field>>(fieldConfiguration);
+                //Se ponen las columnas definidas por el usuario                
+                var gridSettings = Aliquo.Core.Serialization.JsonDeserializeObject<GridSettings>(fieldConfiguration);
+                var visibleFields = gridSettings.Fields;
                 this.Fields = this.FieldSettingBase.MergeVisibleSettings(visibleFields, true).ToList();
+                this.FixedColumns = gridSettings.FixedColumns;
             }
         }
         private void InitializeFieldsSettingsBase()

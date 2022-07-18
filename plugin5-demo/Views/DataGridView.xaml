@@ -24,6 +24,7 @@
             </ResourceDictionary.MergedDictionaries>
             <alqwconverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></alqwconverters:BooleanToVisibilityConverter>
             <aliqw:AddInputKeyToStringConverter x:Key="AddInputKey" />
+            <aliqw:ParameterToBooleanConverter x:Key="ParameterToFalse" IsReversed="True" />
         </ResourceDictionary>
     </UserControl.Resources>
     <UserControl.InputBindings>
@@ -48,6 +49,16 @@
                                    Command="{Binding ViewCommand}"  CommandParameter="setup"
                                    LargeIcon="/Aliquo.Windows;component/Images/setup_large.png"
                                    Icon="/Aliquo.Windows;component/Images/setup.png" Size="Large"/>
+
+                    <fluent:ToggleButton x:Name="FreezeColumnsButton" 
+                            Header="Inmovilizar columnas"
+						    IsChecked="{Binding FixedColumns, Converter={StaticResource ParameterToFalse}, ConverterParameter=0}"
+                            LargeIcon="/Aliquo.Windows;component/Images/columns_frozen_large.png" Size="Large"
+						    ToolTip="{Binding Header, RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey}, ConverterParameter='Ctrl+Alt+F'}">
+                        <i:Interaction.Behaviors>
+                            <alqwc:MethodToCommandBehavior Source="{Binding Source={x:Reference Name=datagrid}}" Method="ToggleFreezeColumns"/>
+                        </i:Interaction.Behaviors>
+                    </fluent:ToggleButton>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
         </fluent:Ribbon>
@@ -59,6 +70,8 @@
                             Fields="{Binding Fields, Mode=OneWay}"                             
                             VisibleSummaryRow="False"
                             Condition="{Binding Condition, Mode=OneWay}"
+                            FrozenColumnCount="{Binding FixedColumns, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            AllowSettingFrozenColumns="true"  
                             AllowResizingColumns="True"
                             AllowMultiSelect="False"                                 
                             VerticalAlignment="Stretch" 
@@ -70,8 +83,7 @@
                     EventName="ConfigureFieldsAfter" 
                     Method="SaveVisibleFields"
                     EventHandlerPropertyName="Handled"
-                    Arg1="{alqwc:EventArgsSource PropertyPath=VisibleFields}"
-                    Arg2="{alqwc:EventArgsSource PropertyPath=Restore}" />
+                    Arg1="{alqwc:EventArgsSource}" />
             </i:Interaction.Behaviors>
 
         </alqwc:DataGrid>
