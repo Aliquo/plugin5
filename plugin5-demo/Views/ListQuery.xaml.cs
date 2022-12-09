@@ -31,9 +31,9 @@ namespace plugin5_demo.Views
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Abono", Text = "Return" },
 
                 // Also you can use the Aliquo Resources, for example, these
-                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.CodSerie", Text = Aliquo.Windows.Properties.Resources.InvoiceSerial },
-                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Numero", Text = Aliquo.Windows.Properties.Resources.InvoiceNumber, Format = Aliquo.Core.Formats.NumberPattern(0, false) },
-                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Fecha", Text = Aliquo.Windows.Properties.Resources.InvoiceDate, Format = Aliquo.Core.Formats.DatePattern(), SortDirection = FieldSortDirection.Descending },
+                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.CodSerie", Text = Aliquo.Windows.Properties.Resources.Invoice_Serial },
+                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Numero", Text = Aliquo.Windows.Properties.Resources.Invoice_Number, Format = Aliquo.Core.Formats.NumberPattern(0, false) },
+                new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.Fecha", Text = Aliquo.Windows.Properties.Resources.Invoice_Date, Format = Aliquo.Core.Formats.DatePattern(), SortDirection = FieldSortDirection.Descending },
 
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.ImporteNETO", Text = "Amount", Format = Aliquo.Core.Formats.NumberPattern(), Summary = FieldSummaryType.Sum },
                 new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Facturas.CodCliente", Text = "Customer code" },
