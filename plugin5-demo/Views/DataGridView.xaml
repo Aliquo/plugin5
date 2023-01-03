@@ -39,6 +39,12 @@
         <fluent:Ribbon Grid.Row="0" Name="Ribbon">
             <fluent:RibbonTabItem Header="General" >
                 <fluent:RibbonGroupBox>
+                    <fluent:Button Header="{x:Static properties:Resources.See}" 
+                                   Command="{Binding ViewCommand}" CommandParameter="view"
+                                   ToolTip="{Binding Header, RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey}}"
+                                   Icon="/Aliquo.Windows;component/Images/window.png"
+                                   LargeIcon="/Aliquo.Windows;component/Images/window_large.png" 
+                                   Size="Large" />
                     <fluent:Button Header="{x:Static properties:Resources.Refresh}" 
                                    Command="{Binding ViewCommand}" CommandParameter="refresh"
                                    ToolTip="{Binding Header, RelativeSource={RelativeSource Self}, Converter={StaticResource AddInputKey}, ConverterParameter='F5'}"
@@ -84,6 +90,8 @@
                     Method="SaveVisibleFields"
                     EventHandlerPropertyName="Handled"
                     Arg1="{alqwc:EventArgsSource}" />
+                <alqwc:EventToCommandBehavior EventName="CellEnterKeyPress" Command="{Binding ViewCommand, Mode=OneWay}" CommandParameter="view" />
+                <alqwc:EventToCommandBehavior EventName="CellDoubleClick" Command="{Binding ViewCommand, Mode=OneWay}" CommandParameter="view" />
             </i:Interaction.Behaviors>
 
         </alqwc:DataGrid>

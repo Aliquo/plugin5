@@ -5,6 +5,7 @@ using Aliquo.Windows.Controls.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace plugin5_demo.ViewModels
 
         //Nombre con el que se guardará la configuración de columnas
         //que haga el usuario desde la pantalla
-        private string settingsCode = "Clientes_Datagrid"; 
+        private string settingsCode = "Clientes_Datagrid";
 
         private List<FieldSetting> FieldSettingBase;
 
@@ -222,13 +223,13 @@ namespace plugin5_demo.ViewModels
 
             FieldSettingBase = new List<Aliquo.Windows.Controls.Models.FieldSetting>();
             FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.Id", Text = "Id. de cliente", IsHidden = true, Alias = "Id", NotSettable = true });
-            FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.Codigo", Text = "Cód. cliente"});
+            FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.Codigo", Text = "Cód. cliente" });
             FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.Nombre", Text = "Cliente" });
             FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.Telefono", Text = "Teléfono" });
             FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.Email", Text = "Email" });
             FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.CIF", Text = "NIF" });
             FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.CodPais", Text = "Cód. Pais" });
-            FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.CodMedioPago", Text = "CodMedioPago", IsHidden=true });
+            FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.CodMedioPago", Text = "CodMedioPago", IsHidden = true });
             FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "MediosPago.Nombre", Text = "Nombre medio pago" });
             FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "Clientes.CodTerminoPago", Text = "CodTerminoPago", IsHidden = true });
             FieldSettingBase.Add(new Aliquo.Windows.Controls.Models.FieldSetting() { Name = "TerminosPago.Nombre", Text = "Nombre término pago" });
@@ -242,20 +243,27 @@ namespace plugin5_demo.ViewModels
         private void ViewCommandExecute(object parameter)
         {
             switch (Aliquo.Core.Convert.ValueToString(parameter).ToLower())
-            {               
+            {
                 case "refresh": //Accion de refrescar los datos
                     {
                         //Se indica que se estan cargando datos
                         SetIsBusy(true);
                         RefreshCommand.Execute(null);
-                        
+
                         //Se indica que se ha terminado la carga de datos
                         SetIsBusy(false);
                         break;
                     }
                 case "setup": //Accion de configurar las columnas del grid
-                    {  
+                    {
                         SetupCommand.Execute(null);
+                        break;
+                    }
+                case "view":
+                    {
+                        DataRowView selectedCustomer = (DataRowView)this.SelectedItem;
+                        long idCustomer = Convert.ToInt64(selectedCustomer["Id"]);
+                        host.Management.Views.ShowRow("Clientes", idCustomer, true); 
                         break;
                     }
             }
@@ -271,12 +279,16 @@ namespace plugin5_demo.ViewModels
             //Por ejemplo, mientras se están cargando los datos (IsBusy=true)
             //No se pueden ejecutar estas acciones
             switch (Aliquo.Core.Convert.ValueToString(parameter).ToLower())
-            {               
+            {
                 case "refresh":
                     {
                         return !IsBusy;
                     }
                 case "setup":
+                    {
+                        return !IsBusy;
+                    }
+                case "view":
                     {
                         return !IsBusy;
                     }
@@ -305,7 +317,7 @@ namespace plugin5_demo.ViewModels
             {
                 //Si se ha activado la ventana, se ejecuta el comando de refresco
                 if (window.IsActive)
-                {                    
+                {
                     RefreshCommand.Execute(null);
                 }
             }
