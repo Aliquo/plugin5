@@ -118,9 +118,9 @@
             <awc:TextBoxValidation 
                                 Width="115"
                                 awcs:SuggestionKeyUpTextBox.Key="Down"
-                                awcs:SuggestionKeyUpTextBox.ProviderAsync="{Binding NotificationCodeSuggestionProvider}"
+                                awcs:SuggestionKeyUpTextBox.ProviderAsync="{Binding ProductCodeSuggestionProvider}"
                                 IsReadOnly="{Binding IsEditMode, Converter={StaticResource InverseBooleanConverter}}"
-                                Required="True"                                
+                                Required="True"
                                 Text="{Binding Product.Codigo}">
             </awc:TextBoxValidation>
             <TextBlock Margin="30,2,20,0">Nombre</TextBlock>

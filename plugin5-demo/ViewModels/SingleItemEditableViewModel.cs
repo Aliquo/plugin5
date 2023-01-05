@@ -95,7 +95,7 @@ namespace plugin5_demo.ViewModels
         {
             get { return product; }
             set { SetProperty(ref product, value); }
-        }     
+        }
 
         private DelegateCommand<object> viewCommand;
         public DelegateCommand<object> ViewCommand
@@ -285,8 +285,8 @@ namespace plugin5_demo.ViewModels
         {
             //Si el usuario pulsa flecha abajo en modo Inserción
             //estando posicionado en el control Codigo, se intenta ofrece el siguiente codigo
-            //basandose en el texto escrito
-            if (IsInserting && !string.IsNullOrEmpty(filter))
+            //basandose en el texto escrito, si lo hubiera
+            if (IsInserting)
             {
                 string result = await host.Management.SuggestCodeAsync("Articulos", "Codigo", filter);
                 return result;
@@ -557,7 +557,7 @@ namespace plugin5_demo.ViewModels
                 if (resultQuestion == MessageResult.Yes)
                 {
                     try
-                    {                        
+                    {
                         await dataAccess.DeleteProduct(productId.Value);
 
                         SetViewShowMode();
@@ -632,7 +632,7 @@ namespace plugin5_demo.ViewModels
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    Product.NombreFamilia= string.Empty;                    
+                    Product.NombreFamilia = string.Empty;
                     return;
                 }
 
@@ -824,8 +824,8 @@ namespace plugin5_demo.ViewModels
         private bool HasPermission(TablePermissions permission)
         {
             return this.Host.Configuration.HasTablePermission(this.Table, permission);
-        }       
-       
+        }
+
         /// <summary>
         /// Realiza las validaciones de datos necesarias y llama al servidor
         /// para realizar la modificacion / insercion de datos.
@@ -835,7 +835,7 @@ namespace plugin5_demo.ViewModels
         {
             bool result = false;
 
-            if (!this.ValidationProvider.Validate() ||!Product.Validate())
+            if (!this.ValidationProvider.Validate() || !Product.Validate())
             {
                 Aliquo.Windows.Message.Show(Aliquo.Windows.Properties.Resources.Message_ValidationRequiredReviewMark, this.Title, MessageButton.OK, MessageImage.Warning);
             }
@@ -852,7 +852,7 @@ namespace plugin5_demo.ViewModels
 
                         await ShowAsync(resultBd);
                         RaiseCanExecuteChanged();
-                        Helper.SendNotification(host,Title, "Se han guardado los datos correctamente", add: false);
+                        Helper.SendNotification(host, Title, "Se han guardado los datos correctamente", add: false);
                         result = true;
                     }
 
@@ -884,7 +884,7 @@ namespace plugin5_demo.ViewModels
         private void InitialiceProduct(Product product = null)
         {
             this.CurrentProductId = null;
-            if (product!=null)
+            if (product != null)
                 this.Product = product;
             else
                 this.Product = new Product();
