@@ -209,7 +209,7 @@
                                    Width="537"
                                    Margin="5,0,0,5"                                      
                                    Grid.Column="2" Grid.Row="1"
-                                   Text="{Binding Product.NombreSubfamilia}"></awc:TextBoxValidation>
+                                   Text="{Binding Product.NombreSubFamilia}"></awc:TextBoxValidation>
 
                 <TextBlock Text="Impuesto"  Grid.Row="2" Grid.Column="0"></TextBlock>
                 <awc:TextBoxValidation                               

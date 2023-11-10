@@ -21,7 +21,7 @@ namespace plugin5_demo.ViewModels
         //que haga el usuario desde la pantalla
         private string settingsCode = "Articulos_editableGrid"; 
         public List<Product> DeletedItems { get; set; }
-
+ 
         private bool isEditing;
         /// <summary>
         /// Indica si se está editando la lista

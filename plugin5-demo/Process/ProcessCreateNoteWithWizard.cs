@@ -97,13 +97,14 @@ namespace plugin5_demo.Process
                 note.Type = Aliquo.Core.NoteType.SalesOrder;
                 note.PropertyCode = customerCode;
                 note.Date = dateNote;
+                note.StoreCode = Host.Configuration.GetParameter("ALMACEN_SALIDAS");
 
                 // Get info product
                 Aliquo.Core.Models.RateQuery rateQuery = new Aliquo.Core.Models.RateQuery();
                 rateQuery.Type = note.Type;
                 rateQuery.Date = note.Date;
                 rateQuery.PropertyCode = note.PropertyCode;
-
+                rateQuery.StoreCode = note.StoreCode;
                 rateQuery.ProductCode = productCode;
                 rateQuery.Quantity = 4;
 

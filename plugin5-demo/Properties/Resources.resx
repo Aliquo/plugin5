@@ -120,7 +120,7 @@
   <data name="AverageCost" xml:space="preserve">
     <value>Coste medio</value>
   </data>
-  <data name="FamilyCod" xml:space="preserve">
+  <data name="FamilyCode" xml:space="preserve">
     <value>Cód. Familia</value>
   </data>
   <data name="FamilyName" xml:space="preserve">
@@ -129,13 +129,13 @@
   <data name="Price" xml:space="preserve">
     <value>Precio Venta</value>
   </data>
-  <data name="ProductCod" xml:space="preserve">
+  <data name="ProductCode" xml:space="preserve">
     <value>Código</value>
   </data>
   <data name="ProductName" xml:space="preserve">
     <value>Artículo</value>
   </data>
-  <data name="SubfamilyCod" xml:space="preserve">
+  <data name="SubfamilyCode" xml:space="preserve">
     <value>Cód. Subfamilia</value>
   </data>
   <data name="SubfamilyName" xml:space="preserve">

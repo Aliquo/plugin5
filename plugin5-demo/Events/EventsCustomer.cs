@@ -3,6 +3,7 @@ using Aliquo.Windows.Extensibility;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Windows.Forms;
 
 namespace plugin5_demo.Events
 {
@@ -22,6 +23,30 @@ namespace plugin5_demo.Events
                 CreateConsoleWindow((IView)sender);
 
             this.console?.Append("EventsCustomer_Loaded");
+
+            IViewTable view = (IViewTable)sender;
+            view.FieldValueChanged += EventsCustomer_FieldValueChanged;
+
+            // Required field
+            view.SetFieldRequired("CIF", true);
+
+            // Set rules of fields (only numbers in Postal Code)
+            view.SetFieldRule("CodigoPostal", "Only numbers", () => { return Aliquo.Core.Convert.ValueIsNumeric(view.GetValue("CodigoPostal")); });
+        }
+
+        private void EventsCustomer_FieldValueChanged(object sender, FieldChangedEventArgs e)
+        {
+            IViewTable view = (IViewTable)sender;
+
+            // Check if field is CodigoPostal
+            if (e.FieldName == "CodigoPostal")
+            {
+                // Get value of field ContraCodigo
+                if (string.IsNullOrWhiteSpace(Aliquo.Core.Convert.ValueToString(view.GetValue("ContraCodigo"))))
+                {
+                    view.SetValue("ContraCodigo", view.GetValue(e.FieldName));
+                }
+            }
         }
 
         /// <summary>Event that occurs before closing the window view, allowing to cancel</summary>
@@ -41,7 +66,7 @@ namespace plugin5_demo.Events
         {
             Aliquo.Core.Models.Data data = (Aliquo.Core.Models.Data)e.Data;
 
-            this.console?.Append($"EventsCustomer_DataDeleting (Cancel={e.Cancel}, Data.Nombre={data["Nombre"].Value})"); 
+            this.console?.Append($"EventsCustomer_DataDeleting (Cancel={e.Cancel}, Data.Nombre={data["Nombre"].Value})");
         }
 
         /// <summary>Event that occurs after deleting data</summary>
@@ -49,7 +74,7 @@ namespace plugin5_demo.Events
         {
             Aliquo.Core.Models.Data data = (Aliquo.Core.Models.Data)e.Data;
 
-            this.console?.Append($"EventsCustomer_DataDeleted (Data.Nombre={data["Nombre"].Value})"); 
+            this.console?.Append($"EventsCustomer_DataDeleted (Data.Nombre={data["Nombre"].Value})");
         }
 
         /// <summary>Event that occurs before updating the data, allowing to cancel</summary>
@@ -58,7 +83,7 @@ namespace plugin5_demo.Events
             Aliquo.Core.Models.Data oldData = (Aliquo.Core.Models.Data)e.OldData;
             Aliquo.Core.Models.Data newData = (Aliquo.Core.Models.Data)e.NewData;
 
-            this.console?.Append($"EventsCustomer_DataUpdating (Cancel={e.Cancel}, oldData.Nombre={oldData["Nombre"].Value}, newData.Nombre={newData["Nombre"].Value})");
+            this.console?.Append($"EventsCustomer_DataUpdating (Cancel={e.Cancel}, oldData.Nombre={oldData?["Nombre"].Value}, newData.Nombre={newData["Nombre"].Value})");
         }
 
         /// <summary>Event that occurs after updating the data</summary>
@@ -82,7 +107,7 @@ namespace plugin5_demo.Events
         #region Auxiliary functions
 
         private ViewModels.EventsConsoleViewModel console;
-        
+
         public EventsCustomer()
         {
             this.Loaded += EventsCustomer_Loaded;
@@ -96,6 +121,7 @@ namespace plugin5_demo.Events
             this.DataUpdated += EventsCustomer_DataUpdated;
 
             this.SelectionChanged += EventsCustomer_SelectionChanged;
+
         }
 
         /// <summary>Activate the window to update the events received</summary>
@@ -109,7 +135,7 @@ namespace plugin5_demo.Events
             var eventView = new Views.EventsConsole();
             console = (ViewModels.EventsConsoleViewModel)eventView.DataContext;
 
-            var debugWindow = host.Management.Views.CreateWindowView("Console customers events");
+            IWindowView debugWindow = host.Management.Views.CreateWindowView("Console customers events");
             debugWindow.Content = eventView;
 
             debugWindow.Closed += ConsoleWindow_Closed;
@@ -122,9 +148,9 @@ namespace plugin5_demo.Events
         /// <summary>Debug view closure is controlled</summary>
         private void ConsoleWindow_Closed(object sender, EventArgs e)
         {
-            var debugWindow = (IWindowView)sender;
+            IWindowView debugWindow = (IWindowView)sender;
 
-            var host = debugWindow.View.GetHost();
+            IHost host = debugWindow.View.GetHost();
 
             debugWindow.Closed -= ConsoleWindow_Closed;
             host.Events.TableUpdated -= TableUpdated;

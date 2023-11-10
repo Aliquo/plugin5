@@ -60,9 +60,9 @@ namespace plugin5_demo.Views
 
             ListActions.Items.Add(new Action() { Code = "DatagridViewParams", Name = "Demo of Datagrid using MVVM and columns setup and conditional loading", Description = "Demo of Datagrid using MVVM, conditional loading, columns setup (saving configuration to a database) and different types of controls. It uses the same viewmodel as previous demo code" });
 
-            ListActions.Items.Add(new Action() { Code = "Editablegrid", Name = "Demo of editable grid using MVVM", Description = "Demo of editable grid using MVVM. It loads and saves changes to a database, locks on editing and implements some data validations." });
+            ListActions.Items.Add(new Action() { Code = "Editablegrid", Name = "Demo of editable Grid using MVVM", Description = "Demo of editable grid using MVVM. It loads and saves changes to a database, locks on editing and implements some data validations." });
 
-            ListActions.Items.Add(new Action() { Code = "EditableSingleItem", Name = "Demo of editable view using MVVM", Description = "Demo of editable view using MVVM. It loads and saves changes to a database, locks on editing and implements some data validations." });
+            ListActions.Items.Add(new Action() { Code = "EditableSingleItem", Name = "Demo of editable View using MVVM", Description = "Demo of editable view using MVVM. It loads and saves changes to a database, locks on editing and implements some data validations." });
         }
 
         private void Controls_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -196,7 +196,7 @@ namespace plugin5_demo.Views
             WizardView wizard = new WizardView();
             var wizardStep = new WizardStep();
 
-            wizardStep.StepText = "Products";
+            wizardStep.StepText = "Products Wizard";
             var tableLink = new WizardTableLink();
 
             tableLink.Fields.Add("Id");

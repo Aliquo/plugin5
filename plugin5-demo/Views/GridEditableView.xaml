@@ -19,12 +19,11 @@
         <ResourceDictionary>
             <!--Merged Dictionaries-->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Aliquo.Windows;Component/Themes/Generic.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Aliquo.Windows.Controls;Component/Themes/Generic.xaml" />
-            </ResourceDictionary.MergedDictionaries>           
+                <ResourceDictionary Source="../Themes/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
             <!--Converters-->
             <aw:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <aw:BooleanToVisibilityConverter  x:Key="InverseBooleanToVisibilityConverter" IsReversed="True" />
+            <aw:BooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" IsReversed="True" />
             <aw:AddInputKeyToStringConverter x:Key="AddInputKey" />
             <aw:InputKeyToStringConverter x:Key="InputKey" />
             <converters:GridNewRowInitiatingEventDataConverter x:Key="GridNewRowInitiatingEventDataConverter" />
@@ -33,6 +32,7 @@
             <converters:GridAddNewRowPositionFromBooleanConverter x:Key="GridAddNewRowFromBooleanConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
+    
     <UserControl.InputBindings>
         <KeyBinding Key="N"
                     Modifiers="Control+Shift"
@@ -61,9 +61,8 @@
                     Modifiers="Shift"
                     Command="{Binding ViewCommand}"
                     CommandParameter="cancel" />
-
-
     </UserControl.InputBindings>
+    
     <UserControl.ToolTip>
         <StackPanel x:Name="ToolTipTable"
                     Orientation="Vertical">
@@ -72,6 +71,7 @@
             </StackPanel>
         </StackPanel>
     </UserControl.ToolTip>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -167,24 +167,26 @@
                           AllowFiltering="True"
                           alqwc:SfDataGridBehavior.ShowAllFields="{Binding ShowAllFields, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <syncf:SfDataGrid.Columns>
-                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.ProductCod}"
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.ProductCode}"
                                                    MappingName="Codigo"
                                                    TextAlignment="Left"
-                                                   Required="true"
+                                                   AllowEditing="false"
                                                    Width="125" />
                 <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.ProductName}"
                                                    MappingName="Nombre"
                                                    TextAlignment="Left"
                                                    Required="true"
-                                                   Width="220"/>
-                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.FamilyCod}"
+                                                   Width="220"
+                                                   CellStyle="{StaticResource editableCell}" />
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.FamilyCode}"
                                                    MappingName="CodFamilia"
                                                    LinkButtonVisible="True"
                                                    LinkButtonCommand="{Binding LinkCommand}"
                                                    LinkButtonCommandParameter="{Binding MappingName, RelativeSource={RelativeSource Self}}"
                                                    LocationScreen="{Binding ElementLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
                                                    TextAlignment="Left"
-                                                   Width="125" />
+                                                   Width="125"
+                                                   CellStyle="{StaticResource editableCell}" />
                 <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.FamilyName}"
                                                    MappingName="NombreFamilia"
                                                    LinkButtonVisible="True"
@@ -192,22 +194,21 @@
                                                    LinkButtonCommandParameter="{Binding MappingName, RelativeSource={RelativeSource Self}}"
                                                    LocationScreen="{Binding ElementLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
                                                    TextAlignment="Left"
-                                                   Width="160"/>
-                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.SubfamilyCod}"
+                                                   Width="160"
+                                                   CellStyle="{StaticResource editableCell}" />
+                <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.SubfamilyCode}"
                                                    MappingName="CodSubFamilia"
                                                    LinkButtonVisible="True"
                                                    LinkButtonCommand="{Binding LinkCommand}"
                                                    LinkButtonCommandParameter="{Binding MappingName, RelativeSource={RelativeSource Self}}"
                                                    LocationScreen="{Binding ElementLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
                                                    TextAlignment="Left"
-                                                   Width="125" />
+                                                   Width="125"
+                                                   CellStyle="{StaticResource editableCell}" />
                 <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.SubfamilyName}"
                                                    MappingName="NombreSubFamilia"
-                                                   LinkButtonVisible="True"
-                                                   LinkButtonCommand="{Binding LinkCommand}"
-                                                   LinkButtonCommandParameter="{Binding MappingName, RelativeSource={RelativeSource Self}}"
-                                                   LocationScreen="{Binding ElementLocation, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}"
                                                    TextAlignment="Left"
+                                                   AllowEditing="false"
                                                    Width="160"/>
                 
                 <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.AverageCost}"
@@ -226,7 +227,8 @@
                                                    HorizontalHeaderContentAlignment="Right"
                                                    AllowFiltering="False"
                                                    ValidationMode="Decimal"
-                                                   Width="120"/>
+                                                   Width="120"
+                                                   CellStyle="{StaticResource editableCell}" />
             </syncf:SfDataGrid.Columns>
 
             <i:Interaction.Behaviors>

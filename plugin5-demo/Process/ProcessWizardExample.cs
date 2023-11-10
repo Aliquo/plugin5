@@ -1,4 +1,5 @@
-﻿using Aliquo.Core.Exceptions;
+﻿using Aliquo.Core;
+using Aliquo.Core.Exceptions;
 using Aliquo.Windows;
 using Aliquo.Windows.Wizard;
 using Aliquo.Windows.Wizard.Controls;
@@ -164,6 +165,30 @@ namespace plugin5_demo.Process
                 });
 
 
+                // String (AccountingAccount)
+                wizardStep3.AddControl(new WizardText()
+                {
+                    Name = "AccountingAccount1",
+                    Text = "AccountingAccount (Always)",
+                    Style = WizardTextStyle.AccountingAccount(AccountAutocompleteType.Always)
+                });
+
+                // String (AccountingAccount)
+                wizardStep3.AddControl(new WizardText()
+                {
+                    Name = "AccountingAccount1",
+                    Text = "AccountingAccount (Never)",
+                    Style = WizardTextStyle.AccountingAccount(AccountAutocompleteType.Never)
+                });
+
+                // String (AccountingAccount)
+                wizardStep3.AddControl(new WizardText()
+                {
+                    Name = "AccountingAccount1",
+                    Text = "AccountingAccount (WithDot)",
+                    Style = WizardTextStyle.AccountingAccount(AccountAutocompleteType.WithDot)
+                });
+
                 WizardStep wizardStep4 = new WizardStep { StepText = "Others uses of wizard" };
 
                 // Connect with tables
@@ -198,6 +223,14 @@ namespace plugin5_demo.Process
                     Text = "Open file",
                     DefaultExtension = ".txt",
                     FilterFiles = "Test documents (*.txt)|*.txt|All files (*.*)|*.*"
+                });
+
+                wizardStep5.AddControl(new WizardOpenFileServer()
+                {
+                    FolderType = Aliquo.Core.FilesFolderType.Templates,
+                    Name = "OpenFileServer",
+                    Text="Open file server",
+                    Subfolder = "Notificaciones"
                 });
 
                 wizardStep5.AddControl(new WizardSaveFile()
