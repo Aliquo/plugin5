@@ -342,15 +342,13 @@ namespace plugin5_demo.ViewModels
                         {
                             if (IsEditMode)
                             {
-                                var location = Aliquo.Windows.SharedWindow.LocationToRect(this.Location);
                                 IWindowGrid grid = host.Management.Views.CreateWindowGrid("Familias", windowOwner: this.window);
-
-                                grid.Top = location.Bottom;
-                                grid.Left = location.Left;
 
                                 grid.LinkField = "Codigo";
                                 grid.Selected += FamilyName_Selected;
                                 grid.Closed += FamilyName_Closed;
+
+                                grid.SetStartPositionRelative(this.Location);
                                 grid.Show();
                             }
                             else
@@ -363,15 +361,13 @@ namespace plugin5_demo.ViewModels
                         {
                             if (IsEditMode)
                             {
-                                var location = Aliquo.Windows.SharedWindow.LocationToRect(this.Location);
                                 IWindowGrid grid = host.Management.Views.CreateWindowGrid("FamiliaSubfamilias", windowOwner: this.window);
-
-                                grid.Top = location.Bottom;
-                                grid.Left = location.Left;
 
                                 grid.LinkField = "Codigo";
                                 grid.Selected += SubFamilyName_Selected;
                                 grid.Closed += SubFamilyName_Closed;
+
+                                grid.SetStartPositionRelative(this.Location);
                                 grid.Show();
                             }
                             else
@@ -384,15 +380,13 @@ namespace plugin5_demo.ViewModels
                         {
                             if (IsEditMode)
                             {
-                                var location = Aliquo.Windows.SharedWindow.LocationToRect(this.Location);
                                 IWindowGrid grid = host.Management.Views.CreateWindowGrid("Impuestos_Tipos", windowOwner: this.window);
-
-                                grid.Top = location.Bottom;
-                                grid.Left = location.Left;
 
                                 grid.LinkField = "Codigo";
                                 grid.Selected += TaxName_Selected;
                                 grid.Closed += TaxName_Closed;
+
+                                grid.SetStartPositionRelative(this.Location);
                                 grid.Show();
                             }
                             else

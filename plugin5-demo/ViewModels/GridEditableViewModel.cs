@@ -407,7 +407,6 @@ namespace plugin5_demo.ViewModels
         /// <param name="filter">Cadena con un texto que hace de filtro que aplicar sobre el campo elegido con <see cref="byCode"/></param>
         private void ShowFamiliesGrid(bool byCode=true, object filter = null)
         {
-            var location = SharedWindow.LocationToRect(this.ElementLocation);
             string condition = string.Empty;
             
             string table = "Familias";
@@ -422,9 +421,6 @@ namespace plugin5_demo.ViewModels
             {
                 grid.AddField($"{table}.{codeField}", text: codeField);
             }
-
-            grid.Top = location.Bottom;
-            grid.Left = location.Left;
 
             grid.Selected += Grid_Families_Selected;
             grid.Closed += Grid_Closed;
@@ -441,6 +437,7 @@ namespace plugin5_demo.ViewModels
                 }
             }
 
+            grid.SetStartPositionRelative(this.ElementLocation);
             grid.Show();
         }
 
@@ -500,8 +497,6 @@ namespace plugin5_demo.ViewModels
             }
 
             //Posicion de la ventana con el grid de busqueda
-            var location = SharedWindow.LocationToRect(this.ElementLocation);
-
             string condition = $"FamiliaSubfamilias.CodFamilia={Aliquo.Core.Data.ToSQLString(codFamilia)}";
 
             IWindowGrid grid = Host.Management.Views.CreateWindowGrid(table, condition: condition, windowOwner: this.Window);
@@ -512,10 +507,7 @@ namespace plugin5_demo.ViewModels
             {
                 grid.AddField($"{table}.{codeField}", text: codeField);
             }
-
-            grid.Top = location.Bottom;
-            grid.Left = location.Left;
-
+              
             grid.Selected += Grid_SubFamilies_Selected;
             grid.Closed += Grid_Closed;
 
@@ -531,6 +523,7 @@ namespace plugin5_demo.ViewModels
                 }
             }
 
+            grid.SetStartPositionRelative(this.ElementLocation);
             grid.Show();
         }
         
