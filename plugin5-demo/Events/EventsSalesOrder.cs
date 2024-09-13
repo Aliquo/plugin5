@@ -119,11 +119,11 @@ namespace plugin5_demo.Events
 
             // You can change the data before save
 
-            object oldReference = view.GetNoteValue("Reference"); 
+            object oldReference = view.GetNoteValue("Reference");
 
             this.console?.Append($"Old reference: {oldReference?.ToString()}");
 
-            view.SetNoteValue("Reference", "Reference from PlugIn"); 
+            view.SetNoteValue("Reference", "Reference from PlugIn");
 
             object newReference = view.GetNoteValue("Reference");
 

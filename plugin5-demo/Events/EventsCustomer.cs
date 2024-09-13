@@ -3,7 +3,6 @@ using Aliquo.Windows.Extensibility;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Windows.Forms;
 
 namespace plugin5_demo.Events
 {

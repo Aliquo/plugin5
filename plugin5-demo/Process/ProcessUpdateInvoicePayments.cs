@@ -1,7 +1,6 @@
 ﻿using Aliquo.Core.Exceptions;
 using Aliquo.Windows;
 using System.Collections.Generic;
-using System.Windows;
 
 namespace plugin5_demo.Process
 {
@@ -20,7 +19,7 @@ namespace plugin5_demo.Process
                 List<Aliquo.Core.Models.Payment> payments = await host.Documents.GetInvoicePaymentsAsync(Aliquo.Core.PropertyDocumentType.Supplier, idInvoice);
 
                 // We obtain the last payment
-                Aliquo.Core.Models.Payment pendingPayment = payments[payments.Count-1];
+                Aliquo.Core.Models.Payment pendingPayment = payments[payments.Count - 1];
 
                 // Update the date
                 pendingPayment.DueDate = System.DateTime.Now;

@@ -1,5 +1,4 @@
 ﻿using Aliquo.Core;
-using Aliquo.Core.Configuration;
 using Aliquo.Windows;
 using Aliquo.Windows.Base;
 using Aliquo.Windows.Controls;
@@ -7,11 +6,7 @@ using plugin5_demo.Helpers;
 using plugin5_demo.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 

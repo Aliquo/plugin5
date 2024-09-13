@@ -15,7 +15,7 @@ namespace plugin5_demo.Process
                 object codeCustomer = await host.Management.GetDataValueAsync("Clientes", "Codigo", "Bloqueado=0", "NEWID()");
 
                 // Get a tax code
-                object codeVAT= await host.Management.GetDataValueAsync("Impuestos_Porcentajes", "CodTipo", "FechaFin IS NULL AND PorcIVA>0", "NEWID()");
+                object codeVAT = await host.Management.GetDataValueAsync("Impuestos_Porcentajes", "CodTipo", "FechaFin IS NULL AND PorcIVA>0", "NEWID()");
 
                 // We create the sales invoice model
                 Aliquo.Core.Models.SalesInvoice invoice = new Aliquo.Core.Models.SalesInvoice();
@@ -29,7 +29,7 @@ namespace plugin5_demo.Process
 
                 // The invoice is created
                 long id = await host.Documents.CreateSalesInvoiceAsync(invoice);
-                
+
                 // The invoice is shown
                 host.Management.Views.ShowRow("Facturas_Clientes", id);
 

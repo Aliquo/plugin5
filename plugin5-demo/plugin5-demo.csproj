@@ -92,6 +92,7 @@
     <Compile Include="Commands\CommandCreateNoteWithWizard.cs" />
     <Compile Include="Commands\CommandLockCustomer.cs" />
     <Compile Include="Commands\CommandShowRiskCustomer.cs" />
+    <Compile Include="Commands\CommandUploadFileSupplier.cs" />
     <Compile Include="Events\EventsCustomer.cs" />
     <Compile Include="Events\EventsInvoiceSupplier.cs" />
     <Compile Include="Events\EventsSalesOrder.cs" />

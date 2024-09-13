@@ -66,6 +66,13 @@ namespace plugin5_demo.Process
                     Style = WizardDateTimeStyle.TimeShort
                 });
 
+                wizardStep1.AddControl(new WizardBoolean()
+                {
+                    Name = "BooleanValue",
+                    Text = "Boolean value",
+                    Default = true
+                });
+
                 // With STEP we mark on which screen we want to show the control
                 // StepText is the title of the window
                 WizardStep wizardStep2 = new WizardStep { StepText = "Different styles of type string" };
@@ -222,14 +229,14 @@ namespace plugin5_demo.Process
                     Name = "OpenFile",
                     Text = "Open file",
                     DefaultExtension = ".txt",
-                    FilterFiles = "Test documents (*.txt)|*.txt|All files (*.*)|*.*"
+                    FilterFiles = "Text documents (*.txt)|*.txt|All files (*.*)|*.*"
                 });
 
                 wizardStep5.AddControl(new WizardOpenFileServer()
                 {
                     FolderType = Aliquo.Core.FilesFolderType.Templates,
                     Name = "OpenFileServer",
-                    Text="Open file server",
+                    Text = "Open file server",
                     Subfolder = "Notificaciones"
                 });
 
@@ -238,7 +245,7 @@ namespace plugin5_demo.Process
                     Name = "SaveFile",
                     Text = "Save file",
                     DefaultExtension = ".txt",
-                    FilterFiles = "Test documents (*.txt)|*.txt|All files (*.*)|*.*"
+                    FilterFiles = "Text documents (*.txt)|*.txt|All files (*.*)|*.*"
                 });
 
                 wizardStep5.AddControl(new WizardFolderBrowser()

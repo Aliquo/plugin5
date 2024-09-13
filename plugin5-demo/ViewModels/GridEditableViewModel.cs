@@ -16,12 +16,12 @@ namespace plugin5_demo.ViewModels
     class GridEditableViewModel : SfGridViewModelBase<Product>
     {
         private const string TABLE_PRODUCTS = "Articulos";
-        
+
         //Nombre con el que se guardará la configuración de columnas
         //que haga el usuario desde la pantalla
-        private string settingsCode = "Articulos_editableGrid"; 
+        private string settingsCode = "Articulos_editableGrid";
         public List<Product> DeletedItems { get; set; }
- 
+
         private bool isEditing;
         /// <summary>
         /// Indica si se está editando la lista
@@ -55,7 +55,7 @@ namespace plugin5_demo.ViewModels
 
             SetIsBusy(true);
             Task.Run(async () =>
-            {   
+            {
                 await LoadVisibleFieldsSettingsAsync(settingsCode);
                 await LoadDataAsync();
             });
@@ -333,7 +333,7 @@ namespace plugin5_demo.ViewModels
                 CloseWindow();
 
         }
-        
+
         /// <summary>
         /// Pide confirmacion la usuario para guardar / descartar los cambios
         /// si estamos en edicion
@@ -405,10 +405,10 @@ namespace plugin5_demo.ViewModels
         /// True => Indica que el filtro se aplica al campo Codigo
         /// False => Indica que el filtro se aplica al campo Nombre</param>
         /// <param name="filter">Cadena con un texto que hace de filtro que aplicar sobre el campo elegido con <see cref="byCode"/></param>
-        private void ShowFamiliesGrid(bool byCode=true, object filter = null)
+        private void ShowFamiliesGrid(bool byCode = true, object filter = null)
         {
             string condition = string.Empty;
-            
+
             string table = "Familias";
             string nameField = "Nombre";
             string codeField = "Codigo";
@@ -507,7 +507,7 @@ namespace plugin5_demo.ViewModels
             {
                 grid.AddField($"{table}.{codeField}", text: codeField);
             }
-              
+
             grid.Selected += Grid_SubFamilies_Selected;
             grid.Closed += Grid_Closed;
 
@@ -526,7 +526,7 @@ namespace plugin5_demo.ViewModels
             grid.SetStartPositionRelative(this.ElementLocation);
             grid.Show();
         }
-        
+
         /// <summary>
         /// Evento que se lanza cuando se selecciona un elemento en la ventana de busqueda (tabla)
         /// </summary>
@@ -548,7 +548,7 @@ namespace plugin5_demo.ViewModels
 
             grid.Close();
         }
-        
+
         /// <summary>
         /// Evento que se lanza al cerra la ventana de busqueda (tabla)
         /// </summary>        
@@ -700,7 +700,6 @@ namespace plugin5_demo.ViewModels
             }
         }
 
-
         protected override bool ViewCommandCanExecute(object parameter)
         {
             switch (Aliquo.Core.Convert.ValueToString(parameter).ToLower())
@@ -745,7 +744,7 @@ namespace plugin5_demo.ViewModels
             var nameField = string.Empty;
             var codeField = string.Empty;
             switch (Aliquo.Core.Convert.ValueToString(parameter))
-            {                
+            {
                 case nameof(Product.CodFamilia):
                     {
                         table = "Familias";

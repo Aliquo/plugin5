@@ -70,7 +70,7 @@ namespace plugin5_demo.ViewModels
         {
             this.Text = null;
         }
- 
+
         public void Append(string text = "")
         {
             this.Text += $"{System.DateTime.Now}:   {new string(System.Convert.ToChar(" "), this.IndentLevel * 4)}{text}\n";

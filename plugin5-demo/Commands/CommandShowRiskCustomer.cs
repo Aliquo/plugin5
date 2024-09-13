@@ -42,7 +42,7 @@ namespace plugin5_demo.Commands
 
                     // Show the risk customer
                     sender.Documents.Views.ShowCustomerRisk(codeCustomer);
-                    
+
                 }
 
             }

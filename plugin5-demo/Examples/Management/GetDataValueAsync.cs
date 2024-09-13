@@ -1,5 +1,4 @@
-﻿
-namespace plugin5_demo.Examples
+﻿namespace plugin5_demo.Examples
 {
     class GetDataValueAsync
     {

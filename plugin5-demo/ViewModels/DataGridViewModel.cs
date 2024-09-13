@@ -4,7 +4,6 @@ using Aliquo.Windows.Controls;
 using Aliquo.Windows.Controls.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -263,7 +262,7 @@ namespace plugin5_demo.ViewModels
                     {
                         DataRowView selectedCustomer = (DataRowView)this.SelectedItem;
                         long idCustomer = Convert.ToInt64(selectedCustomer["Id"]);
-                        host.Management.Views.ShowRow("Clientes", idCustomer, true); 
+                        host.Management.Views.ShowRow("Clientes", idCustomer, true);
                         break;
                     }
             }

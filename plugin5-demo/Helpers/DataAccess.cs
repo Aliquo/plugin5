@@ -1,10 +1,7 @@
-﻿using Aliquo.Core;
-using Aliquo.Windows;
+﻿using Aliquo.Windows;
 using plugin5_demo.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,12 +55,12 @@ namespace plugin5_demo.Helpers
 
             fields.Append("Articulos.Id, Articulos.Codigo, Articulos.Nombre, Articulos.CosteMedio, Articulos.PVP, Articulos.CodFamilia, Articulos.CodSubFamilia, ");
             fields.Append("Articulos.CodTipoImpuesto, Articulos.FechaCreacion, Articulos.FechaModificacion, ");
-            fields.Append("F.Nombre as Familia, S.Nombre as Subfamilia, ");            
+            fields.Append("F.Nombre as Familia, S.Nombre as Subfamilia, ");
             fields.Append("IT.Nombre as TipoImpuesto, ");
             fields.Append("UC.Nombre as UsuarioCreacion, UM.Nombre as UsuarioModificacion");
 
             condition.Append($"Articulos.Id={idProduct}");
-            
+
             var dataTable = await host.Management.GetDataTableAsync(tableName.ToString(), fields.ToString(), condition: condition.ToString(), order: string.Empty);
 
             return ConvierteDataTableProductsToModel(dataTable)[0];
@@ -131,12 +128,12 @@ namespace plugin5_demo.Helpers
             foreach (var item in updatedItems)
             {
                 var data = new Aliquo.Core.Models.Data("Articulos");
-                data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Id", Value = item.Id, IsKey = true });                
+                data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Id", Value = item.Id, IsKey = true });
                 data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "CodFamilia", Value = string.IsNullOrWhiteSpace(item.CodFamilia) ? null : item.CodFamilia });
                 data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Codsubfamilia", Value = string.IsNullOrWhiteSpace(item.CodSubFamilia) ? null : item.CodSubFamilia });
                 data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Codigo", Value = item.Codigo });
                 data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Nombre", Value = item.Nombre });
-                data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "PVP", Value = item.PrecioVenta ?? null });                
+                data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "PVP", Value = item.PrecioVenta ?? null });
 
                 updateOrInsertData.Add(data);
             }
@@ -152,7 +149,7 @@ namespace plugin5_demo.Helpers
             data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Codigo", Value = updatedItem.Codigo });
             data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Nombre", Value = updatedItem.Nombre });
             data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "PVP", Value = updatedItem.PrecioVenta ?? null });
-            data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "CodTipoImpuesto", Value = updatedItem.CodTipoImpuesto});
+            data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "CodTipoImpuesto", Value = updatedItem.CodTipoImpuesto });
             var result = await host.Management.UpdateDataAsync(data);
             if (result != null)
                 return Aliquo.Core.Convert.ValueToInt32(result["Id"].Value);
@@ -188,7 +185,7 @@ namespace plugin5_demo.Helpers
                     UsuarioCreacion = Aliquo.Core.Convert.ValueToString(dr["UsuarioCreacion"]),
                     UsuarioModificacion = Aliquo.Core.Convert.ValueToString(dr["UsuarioModificacion"]),
                     CodTipoImpuesto = Aliquo.Core.Convert.ValueToString(dr["CodTipoImpuesto"]),
-                    NombreTipoImpuesto = Aliquo.Core.Convert.ValueToString(dr["TipoImpuesto"])                    
+                    NombreTipoImpuesto = Aliquo.Core.Convert.ValueToString(dr["TipoImpuesto"])
                 };
                 products.Add(product);
             }

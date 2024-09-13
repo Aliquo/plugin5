@@ -2,11 +2,7 @@
 using Aliquo.Windows.Base;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace plugin5_demo.Models
 {
@@ -206,8 +202,8 @@ namespace plugin5_demo.Models
         }
 
         private bool IsPvpGreaterCost()
-        {            
-            return PrecioVenta.HasValue && CosteMedio.HasValue? PrecioVenta > CosteMedio : true;
+        {
+            return PrecioVenta.HasValue && CosteMedio.HasValue ? PrecioVenta > CosteMedio : true;
         }
         #region IExtendedModel
         /// <summary>

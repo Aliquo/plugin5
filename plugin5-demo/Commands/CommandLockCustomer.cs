@@ -1,7 +1,6 @@
 ﻿using Aliquo.Core.Exceptions;
 using Aliquo.Windows;
 using Aliquo.Windows.Extensibility;
-using System;
 using System.ComponentModel.Composition;
 
 namespace plugin5_demo.Commands
