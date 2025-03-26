@@ -43,6 +43,10 @@
                 </fluent:RibbonGroupBox>
 
                 <fluent:RibbonGroupBox>
+                    <fluent:Button Header="Console events" LargeIcon="/Aliquo.Windows;component/Images/window_empty_large.png" Size="Large" Click="Console_Click"/>
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox>
                     <fluent:Button Header="Grid example" LargeIcon="/Aliquo.Windows;component/Images/window_grid_large.png" Size="Large" Click="Grid_Click"/>
                     <fluent:Button Header="List table example" LargeIcon="/Aliquo.Windows;component/Images/window_grid_large.png" Size="Large" Click="List_Click"/>
                 </fluent:RibbonGroupBox>

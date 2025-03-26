@@ -321,6 +321,7 @@ namespace plugin5_demo.ViewModels
                 }
             }
         }
+
         private void CreateWindow()
         {
             System.Windows.Media.Imaging.BitmapImage Image = SharedResources.GetBitmapImage("window_grid.png");

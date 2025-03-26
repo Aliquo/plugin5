@@ -74,6 +74,10 @@ namespace plugin5_demo.Views
         {
             new Views.ImagesView(this.Host);
         }
+        private void Console_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            new Views.EventsConsoleView(this.Host);
+        }
 
         private void Grid_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -132,9 +136,11 @@ namespace plugin5_demo.Views
                     Process.ProcessUpdateInvoicePayments processUpdateInvoicePayments = new Process.ProcessUpdateInvoicePayments();
                     processUpdateInvoicePayments.StartProcess(this.Host);
                     break;
+
                 case "DatagridView":
                     new Views.DataGridView(this.Host);
                     break;
+
                 case "DatagridViewParams":
                     {
                         var wizard = BuildCountriesWizard();
@@ -142,9 +148,11 @@ namespace plugin5_demo.Views
                         task.Finishing += Task_Finishing;
                         break;
                     }
+
                 case "Editablegrid":
                     new Views.GridEditableView(this.Host);
                     break;
+
                 case "EditableSingleItem":
                     {
                         var wizard = BuildProductsWizard();

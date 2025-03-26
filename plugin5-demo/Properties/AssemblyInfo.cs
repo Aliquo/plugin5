@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Support: <a href='mailto:soporte@desarrollo.com'>soporte@desarrollo.com</a>")] 
 [assembly: AssemblyCompany("Development company name")]
 [assembly: AssemblyProduct("XX customization for Aliquo Software")]
-[assembly: AssemblyCopyright("© 2024 Development company name")]
+[assembly: AssemblyCopyright("© 2025 Development company name")]
 [assembly: AssemblyTrademark("PlugIn")]
 [assembly: AssemblyCulture("")]
 

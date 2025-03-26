@@ -9,10 +9,10 @@ namespace plugin5_demo.Commands
     // This is a example to create a process in the start of Aliquo
     [Export(typeof(ViewEvents))]
     [ViewEventsMetadata(ViewType = ViewType.Home)]
-    class CommandHome : ViewEvents
+    class EventsHome : ViewEvents
     {
 
-        public CommandHome()
+        public EventsHome()
         {
             Loaded += ViewEvents_Loaded;
         }
@@ -23,7 +23,7 @@ namespace plugin5_demo.Commands
             IHost host = ((IView)sender).GetHost();
 
             // Get name of the company
-            var NameCompany = host.Environment.Company;
+            var nameCompany = host.Environment.Company;
 
         }
     }

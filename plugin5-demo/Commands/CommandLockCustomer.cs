@@ -8,6 +8,8 @@ namespace plugin5_demo.Commands
     [Export(typeof(Command))]
     [CommandItemMetadata(ViewType = ViewType.Table,
                          ViewKey = "Clientes",
+                         CommandSize = CommandSize.Middle,
+                         CommandType = CommandType.QuickAction,
                          Text = PlugInTitle,
                          Image = "lock.png")]
     class CommandLockCustomer : Command
