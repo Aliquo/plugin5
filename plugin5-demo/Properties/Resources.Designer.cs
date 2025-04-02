@@ -115,6 +115,15 @@ namespace plugin5_demo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sistema almacenamiento.
+        /// </summary>
+        public static string StorageSystem {
+            get {
+                return ResourceManager.GetString("StorageSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cód. Subfamilia.
         /// </summary>
         public static string SubfamilyCode {

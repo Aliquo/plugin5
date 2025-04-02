@@ -105,6 +105,14 @@ namespace plugin5_demo.Models
             set { SetProperty(ref nombreTipoImpuesto, value); }
         }
 
+        private string almacenamiento;
+
+        public string Almacenamiento
+        {
+            get { return almacenamiento; }
+            set { SetProperty(ref almacenamiento, value); }
+        }
+
 
         private DateTime fechaCreacion;
         public DateTime FechaCreacion
@@ -158,7 +166,6 @@ namespace plugin5_demo.Models
             get { return usuarioModificacion; }
             set { SetProperty(ref usuarioModificacion, value); }
         }
-
 
         private bool isDirty;
         /// <summary>

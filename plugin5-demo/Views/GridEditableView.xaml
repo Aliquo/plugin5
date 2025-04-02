@@ -209,8 +209,7 @@
                                                    MappingName="NombreSubFamilia"
                                                    TextAlignment="Left"
                                                    AllowEditing="false"
-                                                   Width="160"/>
-                
+                                                   Width="160"/>                
                 <alqwc:GridTextBoxValidationColumn HeaderText="{x:Static lr:Resources.AverageCost}"
                                                    DisplayBinding="{Binding Path=CosteMedio, StringFormat={}{0:N2},Mode=TwoWay}"
                                                    MappingName="CosteMedio"                                                   
@@ -229,6 +228,11 @@
                                                    ValidationMode="Decimal"
                                                    Width="120"
                                                    CellStyle="{StaticResource editableCell}" />
+                <syncf:GridComboBoxColumn HeaderText="{x:Static lr:Resources.StorageSystem}" 
+                                          MappingName="Almacenamiento"
+                                          ItemsSource="{Binding StorageSystems}"
+                                          Width="120"
+                                          CellStyle="{StaticResource editableCell}" />
             </syncf:SfDataGrid.Columns>
 
             <i:Interaction.Behaviors>

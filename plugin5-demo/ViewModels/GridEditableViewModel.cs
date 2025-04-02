@@ -37,6 +37,31 @@ namespace plugin5_demo.ViewModels
         {
             get { return $"{TABLE_PRODUCTS}_editable"; }
         }
+
+        private List<string> storageSystems;
+        /// <summary>Lista de paises</summary>
+        public List<string> StorageSystems
+        {
+            get
+            {
+                if (storageSystems == null)
+                {
+                    storageSystems = new List<string>
+                    {
+                        "",
+                        "MFIFO",
+                        "AFIFO",
+                        "MLIFO",
+                        "ALIFO",
+                        "MFEFO",
+                        "AFEFO"
+                    }; 
+                }
+
+                return storageSystems;
+            }
+        }
+
         #region Commands
         public Aliquo.Windows.Base.DelegateCommand ClearFiltersCommand { get; set; }
         #endregion

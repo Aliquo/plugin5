@@ -126,6 +126,9 @@
   <data name="FamilyName" xml:space="preserve">
     <value>Familia</value>
   </data>
+  <data name="StorageSystem" xml:space="preserve">
+    <value>Sistema almacenamiento</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>Precio Venta</value>
   </data>

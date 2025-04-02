@@ -32,7 +32,7 @@ namespace plugin5_demo.Helpers
 
 
             fields.Append("Articulos.Id, Articulos.Codigo, Articulos.Nombre, Articulos.CosteMedio, Articulos.PVP, Articulos.CodFamilia, Articulos.CodSubFamilia, ");
-            fields.Append("Articulos.CodTipoImpuesto, Articulos.FechaCreacion, Articulos.FechaModificacion, ");
+            fields.Append("Articulos.CodTipoImpuesto, Articulos.FechaCreacion, Articulos.FechaModificacion, Articulos.Almacenamiento, ");
             fields.Append("F.Nombre as Familia, S.Nombre as Subfamilia, ");
             fields.Append("IT.Nombre as TipoImpuesto, ");
             fields.Append("UC.Nombre as UsuarioCreacion, UM.Nombre as UsuarioModificacion");
@@ -134,6 +134,7 @@ namespace plugin5_demo.Helpers
                 data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Codigo", Value = item.Codigo });
                 data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Nombre", Value = item.Nombre });
                 data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "PVP", Value = item.PrecioVenta ?? null });
+                data.Fields.Add(new Aliquo.Core.Models.DataField() { Field = "Almacenamiento", Value = string.IsNullOrWhiteSpace(item.Almacenamiento) ? null : item.Almacenamiento });
 
                 updateOrInsertData.Add(data);
             }
@@ -185,7 +186,8 @@ namespace plugin5_demo.Helpers
                     UsuarioCreacion = Aliquo.Core.Convert.ValueToString(dr["UsuarioCreacion"]),
                     UsuarioModificacion = Aliquo.Core.Convert.ValueToString(dr["UsuarioModificacion"]),
                     CodTipoImpuesto = Aliquo.Core.Convert.ValueToString(dr["CodTipoImpuesto"]),
-                    NombreTipoImpuesto = Aliquo.Core.Convert.ValueToString(dr["TipoImpuesto"])
+                    NombreTipoImpuesto = Aliquo.Core.Convert.ValueToString(dr["TipoImpuesto"]),
+                    Almacenamiento = Aliquo.Core.Convert.ValueToString(dr["Almacenamiento"])
                 };
                 products.Add(product);
             }
